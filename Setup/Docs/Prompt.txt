@@ -1,0 +1,142 @@
+Project Type: Enterprise Integration System Customization
+Domain: Financial Data Integration
+Primary Systems: Oracle Database, SAP Business One
+Integration Pattern: CQRS with Event Sourcing
+Background Processing: Hangfire
+Performance Requirements:
+- Process 1000+ financial records per day
+- Maintain sub-second response times for queries
+
+Technical Stack:
+- .NET 9
+- Oracle Database 19c+
+- SAP Business One SDK
+- Hangfire for background processing
+- MediatR for CQRS implementation
+- Entity Framework Core for data access
+
+Key Features Required:
+1. Data Integration:
+   - Oracle view data extraction
+   - SAP B1 journal entry creation
+   - Financial data mapping and transformation
+   - Real-time data synchronization
+
+2. Performance Optimization:
+   - Materialized views for monthly aggregations
+   - Composite indexes for date range queries
+   - Connection pooling with Oracle
+   - Batch processing for large datasets
+
+3. Error Handling:
+   - Retry mechanism for failed operations
+   - Error logging and monitoring
+   - Transaction rollback handling
+   - Duplicate detection and prevention
+
+4. Monitoring:
+   - Hangfire dashboard integration
+   - Performance metrics tracking
+   - System health monitoring
+   - Alerting system for failures
+
+5. Security:
+   - Role-based access control
+   - Data encryption at rest
+   - Secure API endpoints
+   - Audit logging
+
+Data Model:
+- Financial records with 15+ fields
+- Date range filtering support
+- Monthly aggregation capabilities
+- Cost center and branch tracking
+
+Customization Points:
+1. Integration Layer:
+   - Oracle view query optimization
+   - SAP B1 service layer customization
+   - Error handling strategies
+   - Retry policy configuration
+
+2. Performance:
+   - Index configuration
+   - Materialized view definitions
+   - Batch size optimization
+   - Connection pooling settings
+
+3. Monitoring:
+   - Dashboard customization
+   - Alert thresholds
+   - Logging configuration
+   - Health check endpoints
+
+4. Security:
+   - Access control rules
+   - Encryption settings
+   - API security policies
+   - Audit logging configuration
+
+Let me add a diagram to visualize the system architecture and data flow:
+
+flowchart TD
+    subgraph "Source Systems"
+        Oracle["Oracle Database
+        • Financial Records
+        • Cost Centers
+        • Branch Data"]
+        SAP["SAP Business One
+        • Journal Entries
+        • Financial Data"]
+    end
+    
+    subgraph "Integration Layer"
+        CQRS["CQRS Pattern
+        • Commands
+        • Queries
+        • Events"]
+        Hangfire["Hangfire Processing
+        • Background Jobs
+        • Scheduling
+        • Monitoring"]
+    end
+    
+    subgraph "Data Processing"
+        Transform["Data Transformation
+        • Financial Mapping
+        • Validation
+        • Error Handling"]
+        Batch["Batch Processing
+        • Large Dataset Handling
+        • Performance Optimization"]
+    end
+    
+    subgraph "Monitoring & Security"
+        Monitor["Monitoring
+        • Performance Metrics
+        • System Health
+        • Error Tracking"]
+        Security["Security
+        • Access Control
+        • Encryption
+        • Audit Logging"]
+    end
+    
+    Oracle --> CQRS
+    SAP --> CQRS
+    CQRS --> Transform
+    Transform --> Batch
+    Batch --> Monitor
+    Monitor --> Security
+    Security --> SAP
+    
+    classDef source fill:#f9f,stroke:#333,color:#000
+    classDef integration fill:#9ff,stroke:#333,color:#000
+    classDef processing fill:#ff9,stroke:#333,color:#000
+    classDef monitor fill:#f99,stroke:#333,color:#000
+    
+    class Oracle,SAP source
+    class CQRS,Hangfire integration
+    class Transform,Batch processing
+    class Monitor,Security monitor
+

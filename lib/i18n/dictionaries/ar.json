@@ -1,0 +1,514 @@
+{
+  "navigation": {
+    "dashboard": "الرئيسية",
+    "oracleData": "بيانات الفوترة من Oracle",
+    "oracleBilling": "عرض الفوترة من Oracle",
+    "oracleBillingPeople": "عرض الفوترة - أهالي",
+    "oracleBillingGov": "عرض الفوترة - حكومي",
+    "journalEntries": "القيود اليومية",
+    "journalEntriesPeople": "القيود اليومية - أهالي",
+    "journalEntriesGov": "القيود اليومية - حكومي",
+    "logs": "السجلات",
+    "schedule": "الجدولة",
+    "overview": "الملخص"
+  },
+  "dashboard": {
+    "title": "نظام ربط الفواتير مع SAP",
+    "subtitle": "إدارة وربط البيانات المالية من Oracle مع SAP Business One",
+    "stats": {
+      "totalRecords": "إجمالي السجلات",
+      "totalRevenue": "إجمالي الإيرادات",
+      "totalSewer": "إجمالي الصرف الصحي",
+      "totalConsumption": "إجمالي الاستهلاك",
+      "lastSync": "آخر تحديث",
+      "notSynced": "لم يتم التحديث بعد",
+      "totalRevenueDesc": "إجمالي الإيرادات قبل الخصومات",
+      "netRevenue": "صافي الإيرادات",
+      "netRevenueDesc": "الإيرادات بعد الخصومات",
+      "totalConsumptionDesc": "إجمالي استهلاك المياه",
+      "totalTaxes": "إجمالي الضرائب",
+      "totalTaxesDesc": "ضريبة القيمة المضافة والضرائب المحصلة",
+      "netCredits": "صافي الخصومات",
+      "netCreditsDesc": "إجمالي خصومات المياه والصرف الصحي",
+      "processedRecords": "السجلات المعالجة",
+      "processedRecordsDesc": "إجمالي السجلات المحللة"
+    },
+    "actions": {
+      "refresh": "تحديث",
+      "sync": "مزامنة مع SAP",
+      "export": "تصدير",
+      "clear": "مسح البيانات"
+    }
+  },
+  "oracleData": {
+    "title": "بيانات أوراكل المالية",
+    "subtitle": "عرض وإدارة البيانات المالية من أوراكل",
+    "table": {
+      "headers": {
+        "type": "النوع",
+        "branch": "الفرع",
+        "revenue": "الإيرادات",
+        "sewer": "الصرف الصحي",
+        "tanzeem": "التنظيم",
+        "estdama": "الاستدامة",
+        "contract": "العقد",
+        "taxes": "الضرائب",
+        "waterCredit": "رصيد المياه",
+        "sewerCredit": "رصيد الصرف الصحي",
+        "consumption": "الاستهلاك"
+      },
+      "tooltips": {
+        "type": "نوع العميل",
+        "branch": "موقع الفرع",
+        "revenue": "إجمالي مبلغ الإيرادات",
+        "sewer": "إجمالي مبلغ الصرف الصحي",
+        "tanzeem": "إجمالي مبلغ التنظيم",
+        "estdama": "إجمالي مبلغ الاستدامة",
+        "contract": "إجمالي مبلغ العقد",
+        "taxes": "إجمالي مبلغ الضرائب",
+        "waterCredit": "إجمالي رصيد المياه",
+        "sewerCredit": "إجمالي رصيد الصرف الصحي",
+        "consumption": "إجمالي مبلغ الاستهلاك"
+      }
+    },
+    "actions": {
+      "search": "البحث في السجلات...",
+      "filterByBranch": "تصفية حسب الفرع",
+      "allBranches": "جميع الفروع",
+      "export": "تصدير",
+      "refresh": "تحديث",
+      "directSync": "مزامنة مباشرة",
+      "clearLocalData": "مسح البيانات المحلية",
+      "debugStorage": "تصحيح التخزين"
+    },
+    "status": {
+      "lastUpdated": "آخر تحديث",
+      "notSyncedYet": "لم يتم التحديث بعد",
+      "syncing": "جاري المزامنة...",
+      "clearing": "جاري المسح...",
+      "noData": "لا توجد بيانات",
+      "errorLoading": "خطأ في تحميل البيانات"
+    },
+    "messages": {
+      "noDataToSync": "لا توجد بيانات للمزامنة. يرجى تحديث البيانات أو التحقق من التخزين المحلي.",
+      "startingSync": "بدء مزامنة SAP مع {count} سجل...",
+      "syncCompleted": "تمت مزامنة SAP بنجاح.",
+      "syncFailed": "فشلت مزامنة SAP.",
+      "networkError": "خطأ في الشبكة أثناء المزامنة.",
+      "startingDirectSync": "بدء المزامنة المباشرة مع {count} سجل...",
+      "directSyncCompleted": "تمت المزامنة المباشرة بنجاح",
+      "directSyncFailed": "فشلت المزامنة المباشرة",
+      "networkErrorDirect": "خطأ في الشبكة أثناء المزامنة المباشرة",
+      "errorDuringDirectSync": "خطأ أثناء المزامنة المباشرة",
+      "dataPreparationFailed": "فشل في إعداد البيانات.",
+      "dataCleared": "تم مسح البيانات المحلية بنجاح.",
+      "failedToClearData": "فشل في مسح البيانات المحلية.",
+      "loadedFromStorage": "تم تحميل البيانات من التخزين المحلي.",
+      "failedToSaveLocally": "فشل في حفظ البيانات محلياً. قد لا تعمل بعض الميزات بدون اتصال.",
+      "refreshingData": "جاري تحديث بيانات Oracle...",
+      "dataRefreshedSuccessfully": "تم تحديث البيانات بنجاح!",
+      "failedToRefreshData": "فشل في تحديث البيانات: {errorMessage}",
+      "autoRefreshingData": "جاري التحديث التلقائي للبيانات..."
+    }
+  },
+  "oracleDataGov": {
+    "title": "بيانات الفوترة من Oracle - الحكومي",
+    "subtitle": "عرض وإدارة البيانات المالية الحكومية من Oracle لربطها مع SAP B1"
+  },
+  "journalEntryViewerGov": {
+    "header": {
+      "title": "عرض القيود اليومية - الحكومي",
+      "description": "معاينة ومزامنة القيود اليومية الحكومية مع SAP"
+    }
+  },
+  "logs": {
+    "title": "سجلات النظام",
+    "subtitle": "عرض وإدارة سجلات النظام",
+    "description": "مراقبة أحداث النظام والأخطاء في الوقت الفعلي",
+    "status": {
+      "live": "مباشر",
+      "paused": "متوقف مؤقتاً"
+    },
+    "actions": {
+      "clear": "مسح السجلات",
+      "download": "تحميل",
+      "refresh": "تحديث",
+      "search": "البحث في السجلات...",
+      "filterByLevel": "تصفية حسب المستوى",
+      "dateRange": "نطاق التاريخ",
+      "dateFilterActive": "فلتر التاريخ نشط",
+      "applyFilter": "تطبيق الفلتر",
+      "pause": "إيقاف مؤقت",
+      "resume": "استئناف",
+      "export": "تصدير"
+    },
+    "levels": {
+      "all": "جميع المستويات",
+      "success": "نجح",
+      "info": "معلومات",
+      "warning": "تحذير",
+      "error": "خطأ"
+    },
+    "dateFilter": {
+      "startDate": "تاريخ البداية",
+      "endDate": "تاريخ النهاية"
+    },
+    "export": {
+      "currentView": "تصدير العرض الحالي",
+      "allLogs": "تصدير جميع السجلات",
+      "errorLogs": "تصدير سجلات الأخطاء"
+    },
+    "clear": {
+      "description": "حدد السجلات التي تريد مسحها. لا يمكن التراجع عن هذا الإجراء.",
+      "billingLogs": "مسح سجلات الفوترة",
+      "errorLogs": "مسح سجلات الأخطاء",
+      "clearAllLogs": "مسح جميع السجلات"
+    },
+    "types": {
+      "all": "جميع السجلات",
+      "billing": "سجلات الفوترة",
+      "error": "سجلات الأخطاء"
+    },
+        "loading": "جاري التحميل...",
+        "failedToLoad": "فشل في التحميل",
+        "noLogsFound": "لا توجد سجلات",
+        "tryChangingCriteria": "حاول تغيير معايير البحث",
+        "showingEntries": "عرض {count} سجل",
+        "autoRefresh": "التحديث التلقائي",
+        "on": "تشغيل",
+        "off": "إيقاف",
+        "clearAllLogs": "مسح جميع السجلات",
+        "dateFilterActive": "فلتر التاريخ نشط",
+        "from": "من",
+        "to": "إلى",
+        "logsClearedSuccessfully": "تم المسح بنجاح",
+        "failedToClearLogs": "فشل في المسح",
+        "failedToExport": "فشل في تصدير السجلات"
+  },
+  "schedule": {
+    "title": "جدولة المزامنة",
+    "subtitle": "إعداد المزامنة التلقائية",
+    "syncSchedule": {
+      "title": "جدول المزامنة",
+      "description": "تكوين مواعيد المزامنة التلقائية",
+      "enable": "تفعيل المزامنة المجدولة",
+      "enableDescription": "مزامنة البيانات تلقائياً",
+      "quickPresets": "الإعدادات السريعة",
+      "choosePreset": "اختر جدولاً محدداً مسبقاً",
+      "cronExpression": "تعبير Cron",
+      "cronFormat": "التنسيق: دقيقة ساعة يوم شهر يوم-الأسبوع",
+      "timezone": "المنطقة الزمنية"
+    },
+    "status": {
+      "title": "حالة الجدولة",
+      "description": "حالة الجدولة الحالية",
+      "currentStatus": "الحالة الحالية",
+      "active": "نشط",
+      "disabled": "معطل",
+      "nextRun": "المرة القادمة",
+      "scheduleDisabled": "الجدولة معطلة",
+      "lastRun": "آخر تشغيل",
+      "success": "نجح",
+      "failed": "فشل",
+      "pending": "في الانتظار",
+      "unknown": "غير معروف",
+      "processedRecords": "تمت معالجة",
+      "records": "سجلات",
+      "in": "في",
+      "noSyncYet": "لم يتم التحديث بعد",
+      "scheduleExpression": "تعبير الجدولة",
+      "runsEvery6Hours": "يعمل كل 6 ساعات",
+      "disabledMessage": "المزامنة المجدولة معطلة. قم بتفعيلها للبدء.",
+      "notScheduled": "غير مجدول",
+      "testing": "جاري الاختبار...",
+      "syncing": "جاري المزامنة..."
+    },
+    "retryPolicy": {
+      "title": "سياسة إعادة المحاولة",
+      "description": "إعدادات إعادة المحاولة عند الفشل",
+      "retryAttempts": "عدد محاولات إعادة المحاولة",
+      "retryAttemptsDesc": "عدد مرات إعادة المحاولة (0-10)",
+      "retryDelay": "تأخير إعادة المحاولة (دقائق)",
+      "retryDelayDesc": "الوقت بين المحاولات (1-60 دقيقة)",
+      "notificationSettings": "إعدادات الإشعارات",
+      "notificationPlaceholder": "أدخل عناوين البريد الإلكتروني (مفصولة بفواصل)",
+      "updateRetrySettings": "تحديث الإعدادات"
+    },
+    "manualControls": {
+      "title": "التحكم اليدوي",
+      "description": "تشغيل المزامنة يدوياً",
+      "triggerManualSync": "تشغيل المزامنة اليدوية",
+      "triggerDescription": "سيبدأ جلب البيانات من Oracle وإنشاء قيد في SAP B1."
+    },
+    "confirm": {
+      "title": "تأكيد المزامنة",
+      "description": "لديك بيانات محملة. كيف تريد المتابعة؟",
+      "syncWithCurrentData": "المزامنة مع البيانات الحالية",
+      "reloadAndSync": "إعادة التحميل والمزامنة"
+    },
+    "actions": {
+      "save": "حفظ",
+      "test": "اختبار الاتصال",
+      "runSync": "تشغيل المزامنة الآن",
+      "saveConfig": "حفظ الإعدادات",
+      "triggerScheduledTask": "تشغيل المهمة المجدولة الآن"
+    },
+    "messages": {
+      "startingSync": "بدء مزامنة قيد اليومية مع SAP B1 مع {count} سجل...",
+      "manualSyncCompleted": "تمت المزامنة اليدوية بنجاح!",
+      "syncProcessFailed": "فشل عملية المزامنة: {message}",
+      "syncCompleted": "تمت المزامنة بنجاح",
+      "syncFailedNoMessage": "فشلت المزامنة بدون رسالة خطأ.",
+      "scheduledTaskExecuted": "تم تنفيذ المهمة المجدولة بنجاح",
+      "scheduledTaskFailed": "فشلت المهمة المجدولة",
+      "failedToExecuteTask": "فشل في تنفيذ المهمة المجدولة",
+      "scheduleDisabled": "الجدولة معطلة، تم تخطي المهمة",
+      "scheduleNotFound": "لم يتم العثور على إعدادات الجدولة"
+    }
+  },
+  "overview": {
+    "title": "ملخص النظام",
+    "subtitle": "معلومات عامة عن حالة النظام",
+    "syncHistory": {
+      "title": "تاريخ المزامنة",
+      "description": "أداء المزامنة خلال آخر 7 أيام",
+      "noData": "لا توجد بيانات متاحة"
+    },
+    "systemHealth": {
+      "title": "صحة النظام",
+      "description": "أداء النظام العام",
+      "successRate": "معدل النجاح",
+      "excellent": "ممتاز",
+      "good": "جيد",
+      "needsAttention": "يحتاج انتباه",
+      "synced": "تم التحديث",
+      "failed": "فشل"
+    },
+    "recentActivity": {
+      "title": "النشاط الأخير",
+      "description": "أحدث عمليات المزامنة",
+      "noData": "لا يوجد نشاط حديث",
+      "refresh": "تحديث النشاط",
+      "activityStats": "إحصائيات النشاط",
+      "activityStatsDescription": "تفاصيل النشاط ومقاييس النظام",
+      "systemMetrics": "مقاييس النظام",
+      "totalActivities": "إجمالي الأنشطة",
+      "systemUptime": "وقت تشغيل النظام",
+      "totalSyncs": "إجمالي المزامنات",
+      "avgSyncTime": "متوسط وقت المزامنة",
+      "dataIntegrity": "سلامة البيانات",
+      "systemLoad": "حمولة النظام",
+      "lastActivity": "آخر نشاط",
+      "success": "نجح",
+      "errors": "أخطاء",
+      "warnings": "تحذيرات",
+      "info": "معلومات",
+      "viewDetails": "عرض التفاصيل",
+      "details": "التفاصيل"
+    }
+  },
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "خطأ",
+    "success": "نجح",
+    "warning": "تحذير",
+    "info": "معلومات",
+    "confirm": "تأكيد",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "view": "عرض",
+    "close": "إغلاق",
+    "back": "رجوع",
+    "next": "التالي",
+    "previous": "السابق",
+    "first": "الأول",
+    "last": "الأخير",
+    "of": "من",
+    "records": "سجلات",
+    "showing": "عرض",
+    "to": "إلى",
+    "noData": "لا توجد بيانات",
+    "tryAgain": "حاول مرة أخرى",
+    "refreshData": "تحديث البيانات",
+    "clear": "مسح",
+    "apply": "تطبيق",
+    "saving": "جاري الحفظ...",
+    "unknownError": "خطأ غير معروف"
+  },
+  "language": {
+    "switch": "تغيير اللغة",
+    "ar": "العربية",
+    "en": "English"
+  },
+  "header": {
+    "title": "Oracle → SAP B1",
+    "subtitle": "Billing Integration"
+  },
+  "footer": {
+    "allRightsReserved": "جميع الحقوق محفوظة",
+    "createdBy": "تم التطوير بواسطة",
+    "about": "حول",
+    "contactSupport": "التواصل والدعم"
+  },
+  "sap": {
+    "journalEntry": {
+      "success": "تم إنشاء قيد يومية واحد من {count} سجل بنجاح",
+      "failed": "فشل في إنشاء قيد اليومية: {error}",
+      "consolidated": "تم إنشاء قيد يومية موحد من {count} سجل بنجاح",
+      "individual": "تم إنشاء {count} قيد يومية من {records} سجل بنجاح",
+      "noBillingData": "لا توجد بيانات فوترة لإنشاء القيود اليومية.",
+      "noBillingDataOracle": "لا توجد بيانات فوترة في Oracle",
+      "journalEntryExists": "القيد اليومي موجود بالفعل في SAP",
+      "journalEntryExistsMessage": "القيد اليومي موجود بالفعل في SAP. رقم المعاملة: {transactionNumber}، رقم القيد اليومي: {journalNumber}، المرجع: {reference}",
+      "successfullyCreated": "تم إنشاء قيد اليومية الموحد في SAP بنجاح",
+      "failedToCreate": "فشل في إنشاء قيد اليومية",
+      "failedToCreateConsolidated": "فشل في إنشاء قيد اليومية الموحد",
+      "gettingJournalEntryData": "جاري الحصول على بيانات القيد اليومي للمعاينة",
+      "noBillingDataForPreview": "لا توجد بيانات فوترة لإنشاء معاينة القيد اليومي.",
+      "journalEntryDataRetrieved": "تم استرجاع بيانات القيد اليومي بنجاح",
+      "failedToGetJournalEntryData": "فشل في الحصول على بيانات القيد اليومي",
+      "checkingExistingJournalEntry": "جاري التحقق من وجود قيد يومي في SAP",
+      "foundExistingJournalEntry": "تم العثور على قيد يومي موجود",
+      "failedToCheckExistingJournalEntry": "فشل في التحقق من وجود قيد يومي",
+      "queryingLatestJournalEntryData": "جاري استعلام أحدث بيانات القيد اليومي من SAP",
+      "noJournalEntryFound": "لم يتم العثور على قيد يومي بالمعايير المحددة",
+      "noDataReturnedFromSAP": "لم يتم إرجاع بيانات من SAP",
+      "failedToQueryJournalEntryData": "فشل في استعلام بيانات القيد اليومي",
+      "successfullyRetrievedJournalEntryData": "تم استرجاع بيانات القيد اليومي بنجاح",
+      "sampleBillingData": "بيانات الفوترة النموذجية:",
+      "checkingExistingJournalEntryBeforeCreating": "جاري التحقق من وجود قيد يومي قبل إنشاء واحد جديد...",
+      "noExistingJournalEntryFoundCreating": "لم يتم العثور على قيد يومي موجود، جاري إنشاء واحد جديد في SAP...",
+      "invalidBillingDateUsingCurrent": "تاريخ الفوترة غير صحيح في السجل، جاري استخدام التاريخ الحالي بدلاً منه",
+      "errorProcessingBillingDateUsingCurrent": "خطأ في معالجة تاريخ الفوترة، جاري استخدام التاريخ الحالي بدلاً منه",
+      "calculatedTotalsForJournalEntry": "المجاميع المحسوبة للقيد اليومي:",
+      "journalEntryNotBalanced": "القيد اليومي غير متوازن:",
+      "journalEntryBalanced": "القيد اليومي متوازن:",
+      "finalJournalEntryStructure": "هيكل القيد اليومي النهائي:",
+      "queryingSAPEndpointForExistingEntries": "جاري استعلام نقطة نهاية SAP للقيود الموجودة:",
+      "noExistingJournalEntryFoundWithReference": "لم يتم العثور على قيد يومي موجود بالمرجع:",
+      "queryingSAPEndpoint": "جاري استعلام نقطة نهاية SAP:"
+    }
+  },
+  "api": {
+    "sync": {
+      "requestBodyEmpty": "جسم الطلب فارغ. يرجى التأكد من تحميل البيانات قبل المزامنة.",
+      "invalidJsonFormat": "تنسيق JSON غير صحيح في جسم الطلب. قد تكون البيانات تالفة.",
+      "missingBillingData": "بيانات الفوترة مفقودة في جسم الطلب",
+      "billingDataNotArray": "يجب أن تكون بيانات الفوترة مصفوفة",
+      "emptyDataset": "لا يمكن مزامنة مجموعة بيانات فارغة",
+      "unexpectedError": "حدث خطأ غير متوقع أثناء تكامل SAP",
+      "syncCompleted": "تمت مزامنة SAP بنجاح",
+      "syncFailed": "فشلت مزامنة SAP"
+    },
+    "cache": {
+      "syncStatusSaved": "تم حفظ حالة المزامنة بنجاح",
+      "invalidDataType": "نوع بيانات غير صحيح. المتوقع \"schedule-config\" أو \"sync-status\"",
+      "missingConfigData": "بيانات الإعدادات مفقودة",
+      "missingStatusData": "بيانات الحالة مفقودة",
+      "failedToSave": "فشل في حفظ البيانات",
+      "failedToGetStatus": "فشل في الحصول على حالة التخزين المؤقت",
+      "noSyncPerformed": "لم يتم تنفيذ أي مزامنة بعد",
+      "scheduledSyncExecuted": "تم تنفيذ المزامنة المجدولة بنجاح"
+    }
+  },
+  "journalEntryViewer": {
+    "title": "القيود اليومية",
+    "subtitle": "معاينة ومزامنة القيود اليومية مع SAP",
+    "header": {
+      "title": "القيود اليومية",
+      "description": "معاينة ومزامنة القيود اليومية مع SAP"
+    },
+    "actions": {
+      "refreshOracleData": "تحديث بيانات Oracle",
+      "generateView": "إنشاء العرض",
+      "syncToSAP": "المزامنة مع SAP",
+      "syncing": "جاري المزامنة..."
+    },
+    "summary": {
+      "title": "ملخص القيد اليومي",
+      "description": "نظرة عامة على القيد اليومي المراد إنشاؤه",
+      "referenceDate": "تاريخ المرجع",
+      "memo": "المذكرة",
+      "reference": "المرجع",
+      "totalLines": "إجمالي الأسطر",
+      "totalAmount": "المبلغ الإجمالي",
+      "consumption": "استهلاك المياه"
+    },
+    "summaryLabels": {
+      "branches": "الفروع",
+      "records": "السجلات",
+      "successful": "الناجحة",
+      "locale": "اللغة"
+    },
+    "branchCard": {
+      "title": "قيد يومية فرع ({branch})"
+    },
+    "totals": {
+      "title": "المجاميع المالية",
+      "description": "ملخص المبالغ المالية",
+      "entagtam": "إجمالي مبيعات الإنتاج التام",
+      "sewer": "إجمالي المبيعات من الخدمات",
+      "estdama": "جهاز التنظيم",
+      "taxes": "الضرائب",
+      "waterConsumption": "استهلاك المياه"
+    },
+    "journalLines": {
+      "title": "تفاصيل القيد اليومي",
+      "description": "تفصيل مفصل لجميع أسطر القيد اليومي",
+      "accountCode": "رمز الحساب",
+      "description": "الوصف",
+      "activity": "النشاط",
+      "branch": "الفرع",
+      "credit": "دائن",
+      "debit": "مدين",
+      "consumedWater": "المياه المستهلكة"
+    },
+    "balanceCheck": {
+      "title": "التحقق من التوازن",
+      "description": "التأكد من توازن القيد اليومي (إجمالي الدائن = إجمالي المدين)",
+      "totalCredits": "إجمالي الدائن",
+      "totalDebits": "إجمالي المدين",
+      "balanced": "القيد اليومي متوازن",
+      "notBalanced": "القيد اليومي غير متوازن"
+    },
+    "syncStatus": {
+      "title": "حالة المزامنة",
+      "description": "نتيجة آخر عملية مزامنة",
+      "success": "نجحت المزامنة",
+      "failed": "فشلت المزامنة",
+      "docEntry": "رقم المستند في SAP",
+      "timestamp": "الطابع الزمني",
+      "message": "الرسالة"
+    },
+    "messages": {
+      "noOracleData": "لا توجد بيانات Oracle متاحة. يرجى تحميل البيانات من تبويب بيانات Oracle أولاً.",
+      "generatingView": "جاري إنشاء عرض القيد اليومي من بيانات Oracle...",
+      "noJournalEntry": "لا توجد بيانات قيد يومي متاحة للمزامنة",
+      "notBalanced": "لا يمكن المزامنة: القيد اليومي غير متوازن. يرجى مراجعة البيانات.",
+      "syncSuccess": "تمت مزامنة القيد اليومي مع SAP بنجاح!",
+      "syncFailed": "فشلت المزامنة: {message}",
+      "loadData": "تحميل البيانات",
+      "generateView": "إنشاء العرض",
+      "duplicateEntry": "القيد اليومي موجود بالفعل في SAP",
+      "noJournalNumberForQuery": "لا يوجد رقم قيد يومي أو رقم معاملة متاح للاستعلام",
+      "querySuccess": "تم استرجاع أحدث بيانات القيد اليومي بنجاح",
+      "queryFailed": "فشل في استعلام القيد اليومي: {message}",
+      "queryError": "فشل الاستعلام: {message}",
+      "unknownError": "حدث خطأ غير معروف",
+      "errorGeneratingJournalEntry": "خطأ في إنشاء القيد اليومي: {message}",
+      "failedToGenerateJournalEntry": "فشل في إنشاء بيانات القيد اليومي",
+      "loadingOracleData": "جاري تحميل بيانات Oracle...",
+      "retry": "إعادة المحاولة",
+      "duplicateJournalEntryDetected": "تم اكتشاف قيد يومي مكرر",
+      "duplicateEntryBadge": "قيد مكرر",
+      "transactionNumber": "رقم المعاملة",
+      "journalNumber": "رقم القيد اليومي",
+      "latestJournalEntryData": "أحدث بيانات القيد اليومي من SAP",
+      "realTimeDataDescription": "بيانات في الوقت الفعلي تم استرجاعها من SAP B1 بعد المزامنة",
+      "journalEntryLines": "أسطر القيد اليومي ({count} سطر)",
+      "queryLatestJEData": "استعلام أحدث بيانات القيد اليومي"
+    }
+  }
+} 

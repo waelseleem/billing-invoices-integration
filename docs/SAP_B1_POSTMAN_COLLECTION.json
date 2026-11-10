@@ -1,0 +1,260 @@
+{
+  "info": {
+    "name": "SAP B1 Service Layer - Billing Integration",
+    "_postman_id": "b1b1e1b1-0000-0000-0000-000000000001",
+    "description": "SAP B1 Service Layer collection for login and posting journal entries from Oracle billing data. Based on the actual implementation in sap-journal-integration.ts",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"CompanyDB\": \"{{SAP_COMPANY_DB}}\",\n  \"UserName\": \"{{SAP_USERNAME}}\",\n  \"Password\": \"{{SAP_PASSWORD}}\"\n}"
+        },
+        "url": {
+          "raw": "{{SAP_SERVICE_LAYER_URL}}/Login",
+          "host": ["{{SAP_SERVICE_LAYER_URL}}"],
+          "path": ["Login"]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Extract and save the session ID for subsequent requests",
+              "if (pm.response.code === 200) {",
+              "    const responseJson = pm.response.json();",
+              "    pm.environment.set('B1SESSION', responseJson.SessionId);",
+              "    console.log('Session ID saved:', responseJson.SessionId);",
+              "} else {",
+              "    console.error('Login failed:', pm.response.text());",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Create Journal Entry - Contract 658330",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Cookie", "value": "B1SESSION={{B1SESSION}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"ReferenceDate\": \"2025-07-24\",\n  \"Memo\": \"Oracle Billing Integration - Contract 658330 - 2025-07-24\",\n  \"Reference\": \"BILL-658330-20250724\",\n  \"JournalEntryLines\": [\n    {\n      \"ShortName\": \"C1002\",\n      \"Debit\": 11138467.16,\n      \"Credit\": 0,\n      \"LineMemo\": \"عملاء سكنى - عقد 658330\"\n    },\n    {\n      \"AccountCode\": \"511111\",\n      \"Debit\": 0,\n      \"Credit\": 5621612.45,\n      \"LineMemo\": \"إجمالي مبيعات الإنتاج التام من السلع\"\n    },\n    {\n      \"AccountCode\": \"511121\",\n      \"Debit\": 0,\n      \"Credit\": 3184930.64,\n      \"LineMemo\": \"إجمالي المبيعات من الخدمات المؤداة\"\n    },\n    {\n      \"AccountCode\": \"324371\",\n      \"Debit\": 0,\n      \"Credit\": 1351220.65,\n      \"LineMemo\": \"جهاز التنظيم وحماية المستهلك\"\n    },\n    {\n      \"AccountCode\": \"51211\",\n      \"Debit\": 0,\n      \"Credit\": 658330,\n      \"LineMemo\": \"إيرادات مبيعات أخرى\"\n    },\n    {\n      \"AccountCode\": \"324324\",\n      \"Debit\": 0,\n      \"Credit\": 23500.44,\n      \"LineMemo\": \"الضريبة على الدمغة\"\n    },\n    {\n      \"AccountCode\": \"324322\",\n      \"Debit\": 0,\n      \"Credit\": 233197.7788,\n      \"LineMemo\": \"الضريبة على القيمة المضافة\"\n    },\n    {\n      \"AccountCode\": \"51211\",\n      \"Debit\": 0,\n      \"Credit\": 65675.203,\n      \"LineMemo\": \"إيرادات مبيعات أخرى\"\n    }\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{SAP_SERVICE_LAYER_URL}}/JournalEntries",
+          "host": ["{{SAP_SERVICE_LAYER_URL}}"],
+          "path": ["JournalEntries"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Journal Entry - Contract 434265",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Cookie", "value": "B1SESSION={{B1SESSION}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"ReferenceDate\": \"2025-07-24\",\n  \"Memo\": \"Oracle Billing Integration - Contract 434265 - 2025-07-24\",\n  \"Reference\": \"BILL-434265-20250724\",\n  \"JournalEntryLines\": [\n    {\n      \"ShortName\": \"C1002\",\n      \"Debit\": 10864995.69,\n      \"Credit\": 0,\n      \"LineMemo\": \"عملاء سكنى - عقد 434265\"\n    },\n    {\n      \"AccountCode\": \"511111\",\n      \"Debit\": 0,\n      \"Credit\": 7567852.25,\n      \"LineMemo\": \"إجمالي مبيعات الإنتاج التام من السلع\"\n    },\n    {\n      \"AccountCode\": \"511121\",\n      \"Debit\": 0,\n      \"Credit\": 1858763.081,\n      \"LineMemo\": \"إجمالي المبيعات من الخدمات المؤداة\"\n    },\n    {\n      \"AccountCode\": \"324371\",\n      \"Debit\": 0,\n      \"Credit\": 791379.3,\n      \"LineMemo\": \"جهاز التنظيم وحماية المستهلك\"\n    },\n    {\n      \"AccountCode\": \"51211\",\n      \"Debit\": 0,\n      \"Credit\": 434265,\n      \"LineMemo\": \"إيرادات مبيعات أخرى\"\n    },\n    {\n      \"AccountCode\": \"324324\",\n      \"Debit\": 0,\n      \"Credit\": 23076.94,\n      \"LineMemo\": \"الضريبة على الدمغة\"\n    },\n    {\n      \"AccountCode\": \"324322\",\n      \"Debit\": 0,\n      \"Credit\": 146294.0668,\n      \"LineMemo\": \"الضريبة على القيمة المضافة\"\n    },\n    {\n      \"AccountCode\": \"51211\",\n      \"Debit\": 0,\n      \"Credit\": 43365.053,\n      \"LineMemo\": \"إيرادات مبيعات أخرى\"\n    }\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{SAP_SERVICE_LAYER_URL}}/JournalEntries",
+          "host": ["{{SAP_SERVICE_LAYER_URL}}"],
+          "path": ["JournalEntries"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Journal Entry - Contract 384160",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Cookie", "value": "B1SESSION={{B1SESSION}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"ReferenceDate\": \"2025-07-24\",\n  \"Memo\": \"Oracle Billing Integration - Contract 384160 - 2025-07-24\",\n  \"Reference\": \"BILL-384160-20250724\",\n  \"JournalEntryLines\": [\n    {\n      \"ShortName\": \"C1002\",\n      \"Debit\": 5720734.97,\n      \"Credit\": 0,\n      \"LineMemo\": \"عملاء سكنى - عقد 384160\"\n    },\n    {\n      \"AccountCode\": \"511111\",\n      \"Debit\": 0,\n      \"Credit\": 3368244.4,\n      \"LineMemo\": \"إجمالي مبيعات الإنتاج التام من السلع\"\n    },\n    {\n      \"AccountCode\": \"511121\",\n      \"Debit\": 0,\n      \"Credit\": 1079163.44,\n      \"LineMemo\": \"إجمالي المبيعات من الخدمات المؤداة\"\n    },\n    {\n      \"AccountCode\": \"324371\",\n      \"Debit\": 0,\n      \"Credit\": 674080,\n      \"LineMemo\": \"جهاز التنظيم وحماية المستهلك\"\n    },\n    {\n      \"AccountCode\": \"51211\",\n      \"Debit\": 0,\n      \"Credit\": 384160,\n      \"LineMemo\": \"إيرادات مبيعات أخرى\"\n    },\n    {\n      \"AccountCode\": \"324324\",\n      \"Debit\": 0,\n      \"Credit\": 13739.55,\n      \"LineMemo\": \"الضريبة على الدمغة\"\n    },\n    {\n      \"AccountCode\": \"324322\",\n      \"Debit\": 0,\n      \"Credit\": 162928.9256,\n      \"LineMemo\": \"الضريبة على القيمة المضافة\"\n    },\n    {\n      \"AccountCode\": \"51211\",\n      \"Debit\": 0,\n      \"Credit\": 38418.65,\n      \"LineMemo\": \"إيرادات مبيعات أخرى\"\n    }\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{SAP_SERVICE_LAYER_URL}}/JournalEntries",
+          "host": ["{{SAP_SERVICE_LAYER_URL}}"],
+          "path": ["JournalEntries"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Journal Entry - Contract 228365",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Cookie", "value": "B1SESSION={{B1SESSION}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"ReferenceDate\": \"2025-07-24\",\n  \"Memo\": \"Oracle Billing Integration - Contract 228365 - 2025-07-24\",\n  \"Reference\": \"BILL-228365-20250724\",\n  \"JournalEntryLines\": [\n    {\n      \"ShortName\": \"C1002\",\n      \"Debit\": 3214584.9,\n      \"Credit\": 0,\n      \"LineMemo\": \"عملاء سكنى - عقد 228365\"\n    },\n    {\n      \"AccountCode\": \"511111\",\n      \"Debit\": 0,\n      \"Credit\": 1768046.05,\n      \"LineMemo\": \"إجمالي مبيعات الإنتاج التام من السلع\"\n    },\n    {\n      \"AccountCode\": \"511121\",\n      \"Debit\": 0,\n      \"Credit\": 730070.32,\n      \"LineMemo\": \"إجمالي المبيعات من الخدمات المؤداة\"\n    },\n    {\n      \"AccountCode\": \"324371\",\n      \"Debit\": 0,\n      \"Credit\": 390425,\n      \"LineMemo\": \"جهاز التنظيم وحماية المستهلك\"\n    },\n    {\n      \"AccountCode\": \"51211\",\n      \"Debit\": 0,\n      \"Credit\": 228365,\n      \"LineMemo\": \"إيرادات مبيعات أخرى\"\n    },\n    {\n      \"AccountCode\": \"324324\",\n      \"Debit\": 0,\n      \"Credit\": 7375.79,\n      \"LineMemo\": \"الضريبة على الدمغة\"\n    },\n    {\n      \"AccountCode\": \"324322\",\n      \"Debit\": 0,\n      \"Credit\": 67607.9558,\n      \"LineMemo\": \"الضريبة على القيمة المضافة\"\n    },\n    {\n      \"AccountCode\": \"51211\",\n      \"Debit\": 0,\n      \"Credit\": 22694.778,\n      \"LineMemo\": \"إيرادات مبيعات أخرى\"\n    }\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{SAP_SERVICE_LAYER_URL}}/JournalEntries",
+          "host": ["{{SAP_SERVICE_LAYER_URL}}"],
+          "path": ["JournalEntries"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Journal Entry - Contract 353235",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Cookie", "value": "B1SESSION={{B1SESSION}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"ReferenceDate\": \"2025-07-24\",\n  \"Memo\": \"Oracle Billing Integration - Contract 353235 - 2025-07-24\",\n  \"Reference\": \"BILL-353235-20250724\",\n  \"JournalEntryLines\": [\n    {\n      \"ShortName\": \"C1002\",\n      \"Debit\": 5152551.24,\n      \"Credit\": 0,\n      \"LineMemo\": \"عملاء سكنى - عقد 353235\"\n    },\n    {\n      \"AccountCode\": \"511111\",\n      \"Debit\": 0,\n      \"Credit\": 3014388.6,\n      \"LineMemo\": \"إجمالي مبيعات الإنتاج التام من السلع\"\n    },\n    {\n      \"AccountCode\": \"511121\",\n      \"Debit\": 0,\n      \"Credit\": 1012481.2,\n      \"LineMemo\": \"إجمالي المبيعات من الخدمات المؤداة\"\n    },\n    {\n      \"AccountCode\": \"324371\",\n      \"Debit\": 0,\n      \"Credit\": 614317,\n      \"LineMemo\": \"جهاز التنظيم وحماية المستهلك\"\n    },\n    {\n      \"AccountCode\": \"51211\",\n      \"Debit\": 0,\n      \"Credit\": 353235,\n      \"LineMemo\": \"إيرادات مبيعات أخرى\"\n    },\n    {\n      \"AccountCode\": \"324324\",\n      \"Debit\": 0,\n      \"Credit\": 11854.53,\n      \"LineMemo\": \"الضريبة على الدمغة\"\n    },\n    {\n      \"AccountCode\": \"324322\",\n      \"Debit\": 0,\n      \"Credit\": 111412.0945,\n      \"LineMemo\": \"الضريبة على القيمة المضافة\"\n    },\n    {\n      \"AccountCode\": \"51211\",\n      \"Debit\": 0,\n      \"Credit\": 34862.817,\n      \"LineMemo\": \"إيرادات مبيعات أخرى\"\n    }\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{SAP_SERVICE_LAYER_URL}}/JournalEntries",
+          "host": ["{{SAP_SERVICE_LAYER_URL}}"],
+          "path": ["JournalEntries"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Journal Entry - Contract 411400",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Cookie", "value": "B1SESSION={{B1SESSION}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"ReferenceDate\": \"2025-07-24\",\n  \"Memo\": \"Oracle Billing Integration - Contract 411400 - 2025-07-24\",\n  \"Reference\": \"BILL-411400-20250724\",\n  \"JournalEntryLines\": [\n    {\n      \"ShortName\": \"C1002\",\n      \"Debit\": 4635885.35,\n      \"Credit\": 0,\n      \"LineMemo\": \"عملاء سكنى - عقد 411400\"\n    },\n    {\n      \"AccountCode\": \"511111\",\n      \"Debit\": 0,\n      \"Credit\": 2559239.1,\n      \"LineMemo\": \"إجمالي مبيعات الإنتاج التام من السلع\"\n    },\n    {\n      \"AccountCode\": \"511121\",\n      \"Debit\": 0,\n      \"Credit\": 779985.84,\n      \"LineMemo\": \"إجمالي المبيعات من الخدمات المؤداة\"\n    },\n    {\n      \"AccountCode\": \"324371\",\n      \"Debit\": 0,\n      \"Credit\": 708333.15,\n      \"LineMemo\": \"جهاز التنظيم وحماية المستهلك\"\n    },\n    {\n      \"AccountCode\": \"51211\",\n      \"Debit\": 0,\n      \"Credit\": 411400,\n      \"LineMemo\": \"إيرادات مبيعات أخرى\"\n    },\n    {\n      \"AccountCode\": \"324324\",\n      \"Debit\": 0,\n      \"Credit\": 11263.91,\n      \"LineMemo\": \"الضريبة على الدمغة\"\n    },\n    {\n      \"AccountCode\": \"324322\",\n      \"Debit\": 0,\n      \"Credit\": 123735.8878,\n      \"LineMemo\": \"الضريبة على القيمة المضافة\"\n    },\n    {\n      \"AccountCode\": \"51211\",\n      \"Debit\": 0,\n      \"Credit\": 41927.458,\n      \"LineMemo\": \"إيرادات مبيعات أخرى\"\n    }\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{SAP_SERVICE_LAYER_URL}}/JournalEntries",
+          "host": ["{{SAP_SERVICE_LAYER_URL}}"],
+          "path": ["JournalEntries"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Journal Entry - Contract 409440",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Cookie", "value": "B1SESSION={{B1SESSION}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"ReferenceDate\": \"2025-07-24\",\n  \"Memo\": \"Oracle Billing Integration - Contract 409440 - 2025-07-24\",\n  \"Reference\": \"BILL-409440-20250724\",\n  \"JournalEntryLines\": [\n    {\n      \"ShortName\": \"C1002\",\n      \"Debit\": 5024553.23,\n      \"Credit\": 0,\n      \"LineMemo\": \"عملاء سكنى - عقد 409440\"\n    },\n    {\n      \"AccountCode\": \"511111\",\n      \"Debit\": 0,\n      \"Credit\": 2868427.45,\n      \"LineMemo\": \"إجمالي مبيعات الإنتاج التام من السلع\"\n    },\n    {\n      \"AccountCode\": \"511121\",\n      \"Debit\": 0,\n      \"Credit\": 882471.44,\n      \"LineMemo\": \"إجمالي المبيعات من الخدمات المؤداة\"\n    },\n    {\n      \"AccountCode\": \"324371\",\n      \"Debit\": 0,\n      \"Credit\": 683883,\n      \"LineMemo\": \"جهاز التنظيم وحماية المستهلك\"\n    },\n    {\n      \"AccountCode\": \"51211\",\n      \"Debit\": 0,\n      \"Credit\": 409440,\n      \"LineMemo\": \"إيرادات مبيعات أخرى\"\n    },\n    {\n      \"AccountCode\": \"324324\",\n      \"Debit\": 0,\n      \"Credit\": 12724.16,\n      \"LineMemo\": \"الضريبة على الدمغة\"\n    },\n    {\n      \"AccountCode\": \"324322\",\n      \"Debit\": 0,\n      \"Credit\": 126453.3172,\n      \"LineMemo\": \"الضريبة على القيمة المضافة\"\n    },\n    {\n      \"AccountCode\": \"51211\",\n      \"Debit\": 0,\n      \"Credit\": 41153.861,\n      \"LineMemo\": \"إيرادات مبيعات أخرى\"\n    }\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{SAP_SERVICE_LAYER_URL}}/JournalEntries",
+          "host": ["{{SAP_SERVICE_LAYER_URL}}"],
+          "path": ["JournalEntries"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Test Connection",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Cookie", "value": "B1SESSION={{B1SESSION}}" }
+        ],
+        "url": {
+          "raw": "{{SAP_SERVICE_LAYER_URL}}/CompanyInfo",
+          "host": ["{{SAP_SERVICE_LAYER_URL}}"],
+          "path": ["CompanyInfo"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Logout",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Cookie", "value": "B1SESSION={{B1SESSION}}" }
+        ],
+        "url": {
+          "raw": "{{SAP_SERVICE_LAYER_URL}}/Logout",
+          "host": ["{{SAP_SERVICE_LAYER_URL}}"],
+          "path": ["Logout"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "exec": [],
+        "type": "text/javascript"
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "exec": [],
+        "type": "text/javascript"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "SAP_SERVICE_LAYER_URL",
+      "value": "https://localhost:50000/b1s/v1",
+      "type": "string"
+    },
+    {
+      "key": "SAP_COMPANY_DB",
+      "value": "SBODemoUS",
+      "type": "string"
+    },
+    {
+      "key": "SAP_USERNAME",
+      "value": "manager",
+      "type": "string"
+    },
+    {
+      "key": "SAP_PASSWORD",
+      "value": "manager",
+      "type": "string"
+    },
+    {
+      "key": "B1SESSION",
+      "value": "",
+      "type": "string"
+    }
+  ]
+} 

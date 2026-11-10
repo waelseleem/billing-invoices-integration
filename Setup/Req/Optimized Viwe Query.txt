@@ -1,0 +1,130 @@
+select
+
+case when d.branche  in ('0','1') then 'C1002'
+  when substr(d.billgroup,1,1) = '2' then 'C1002'
+    when substr(d.billgroup,1,1) = '3' then 'C1002'
+      when substr(d.billgroup,1,1) = '4' then 'C1002'
+    when substr(d.billgroup,1,1) = '5' then 'C1002'
+      when substr(d.billgroup,1,1) = '6' then 'C1002'
+    when substr(d.billgroup,1,1) = '7' then 'C1002'
+    when substr(d.billgroup,1,2) = '16' then 'C1002'
+       else
+          'null'
+ end as cstype  ,
+
+case when d.branche  in ('0','1') then '1'
+  when substr(d.billgroup,1,1) = '2' then '2'
+    when substr(d.billgroup,1,1) = '3' then '3'
+      when substr(d.billgroup,1,1) = '4' then '6'
+    when substr(d.billgroup,1,1) = '5' then '7'
+      when substr(d.billgroup,1,1) = '6' then '4'
+    when substr(d.billgroup,1,1) = '7' then '8'
+    when substr(d.billgroup,1,2) = '16' then '5'
+       else
+          'null'
+ end as branche  ,
+
+case when d.branche  in ('0','1') then '1'
+  when substr(d.billgroup,1,1) = '2' then '2'
+    when substr(d.billgroup,1,1) = '3' then '3'
+      when substr(d.billgroup,1,1) = '4' then '6'
+    when substr(d.billgroup,1,1) = '5' then '7'
+      when substr(d.billgroup,1,1) = '6' then '4'
+    when substr(d.billgroup,1,1) = '7' then '8'
+    when substr(d.billgroup,1,2) = '16' then '5'
+       else
+          'null'
+ end as costcenter  ,
+
+h.BILNG_DATE   ,
+
+
+ SUM(nvl(d.w_ammount,0))
++ SUM(nvl(d.w_ammount2,0))
++ SUM(nvl(d.w_off,0)) as EntagTam,
+
+ SUM(nvl(d.s_amount,0))
+ +SUM(nvl(d.s_amount2,0))  as Sewer,
+
+ SUM(nvl(d.tanzem,0)) as Tanzeem,
+ SUM(nvl(d.eshterak,0)) as estdama,
+ SUM(nvl(d.DTA,0)) as contract,
+ sum(nvl(taxes,0)) as taxeS,
+ SUM(nvl(round,0)) as rounding,
+
+
+  sum(nvl(d.KA,0))
+ +sum(nvl(d.KM,0))
+ +sum(nvl(d.KT,0))
+ +sum(nvl(d.KTM,0))
+ +sum(nvl(d.KQM,0)) as watercredit,
+
+  sum(nvl(d.KSW,0))
++ sum(nvl(d.KTS,0)) as sewercredit,
+
+  sum(nvl(d.EA,0))
++ sum(nvl(d.EM,0))
++ sum(nvl(d.ET,0))
++ sum(nvl(d.EQM,0)) as waterdebit,
+ sum(nvl(d.ESW,0)) as sewerdebit
+,sum(nvl(d.W_consump,0)) as consump
+
+
+ from data_collect_fin d,f_statm h
+ where h.custkey=d.custkey
+ and h.bilng_date=d.bilng_date
+
+ and h.substm_no=1
+
+ group by
+ case when d.branche  in ('0','1') then 'C1002'
+  when substr(d.billgroup,1,1) = '2' then 'C1002'
+    when substr(d.billgroup,1,1) = '3' then 'C1002'
+      when substr(d.billgroup,1,1) = '4' then 'C1002'
+    when substr(d.billgroup,1,1) = '5' then 'C1002'
+      when substr(d.billgroup,1,1) = '6' then 'C1002'
+    when substr(d.billgroup,1,1) = '7' then 'C1002'
+    when substr(d.billgroup,1,2) = '16' then 'C1002'
+       else
+          'null'
+ end ,
+  case when d.branche  in ('0','1') then '1'
+  when substr(d.billgroup,1,1) = '2' then '2'
+    when substr(d.billgroup,1,1) = '3' then '3'
+      when substr(d.billgroup,1,1) = '4' then '6'
+    when substr(d.billgroup,1,1) = '5' then '7'
+      when substr(d.billgroup,1,1) = '6' then '4'
+    when substr(d.billgroup,1,1) = '7' then '8'
+    when substr(d.billgroup,1,2) = '16' then '5'
+       else
+          'null'
+ end,
+ case when d.branche  in ('0','1') then '1'
+  when substr(d.billgroup,1,1) = '2' then '2'
+    when substr(d.billgroup,1,1) = '3' then '3'
+      when substr(d.billgroup,1,1) = '4' then '6'
+    when substr(d.billgroup,1,1) = '5' then '7'
+      when substr(d.billgroup,1,1) = '6' then '4'
+    when substr(d.billgroup,1,1) = '7' then '8'
+    when substr(d.billgroup,1,2) = '16' then '5'
+       else
+ end , h.BILNG_DATE
+
+
+=== Column Structure ===
+CSTYPE: VARCHAR2(5) Y
+BRANCHE: VARCHAR2(4) Y
+COSTCENTER: VARCHAR2(4) Y
+BILNG_DATE: DATE(7) Y
+ENTAGTAM: NUMBER(22) Y
+SEWER: NUMBER(22) Y
+TANZEEM: NUMBER(22) Y
+ESTDAMA: NUMBER(22) Y
+CONTRACT: NUMBER(22) Y
+TAXES: NUMBER(22) Y
+ROUNDING: NUMBER(22) Y
+WATERCREDIT: NUMBER(22) Y
+SEWERCREDIT: NUMBER(22) Y
+WATERDEBIT: NUMBER(22) Y
+SEWERDEBIT: NUMBER(22) Y
+CONSUMP: NUMBER(22) Y

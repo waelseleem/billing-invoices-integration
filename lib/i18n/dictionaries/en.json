@@ -1,0 +1,515 @@
+{
+  "navigation": {
+    "dashboard": "Dashboard",
+    "oracleData": "Oracle Billing Data",
+    "oracleBilling": "Oracle Billing View",
+    "oracleBillingPeople": "Oracle Billing View - People",
+    "oracleBillingGov": "Oracle Billing View - Gov",
+    "journalEntries": "Journal Entries",
+    "journalEntriesPeople": "Journal Entries - People",
+    "journalEntriesGov": "Journal Entries - Gov",
+    "logs": "Logs",
+    "schedule": "Schedule",
+    "overview": "Overview"
+  },
+  "dashboard": {
+    "title": "Billing Invoices to SAP B1 Integration Dashboard",
+    "subtitle": "Manage and integrate Oracle financial data with SAP Business One",
+    "stats": {
+      "totalRecords": "Total Records",
+      "totalRevenue": "Total Revenue",
+      "totalSewer": "Total Sewer",
+      "totalConsumption": "Total Consumption",
+      "lastSync": "Last Sync",
+      "notSynced": "Not synced yet",
+      "totalRevenueDesc": "Gross revenue before credits",
+      "netRevenue": "Net Revenue",
+      "netRevenueDesc": "Revenue after credits",
+      "totalConsumptionDesc": "Total water consumption",
+      "totalTaxes": "Total Taxes",
+      "totalTaxesDesc": "VAT and other taxes collected",
+      "netCredits": "Net Credits",
+      "netCreditsDesc": "Total water and sewer credits issued",
+      "processedRecords": "Processed Records",
+      "processedRecordsDesc": "Total records analyzed"
+    },
+    "actions": {
+      "refresh": "Refresh",
+      "sync": "Sync with SAP",
+      "export": "Export",
+      "clear": "Clear Local Data"
+    }
+  },
+  "oracleData": {
+    "title": "Oracle Financial Data",
+    "subtitle": "View and manage Oracle financial data for SAP B1 integration",
+    "table": {
+      "headers": {
+        "type": "Type",
+        "branch": "Branch",
+        "revenue": "Revenue",
+        "sewer": "Sewer",
+        "tanzeem": "Tanzeem",
+        "estdama": "Estdama",
+        "contract": "Contract",
+        "taxes": "Taxes",
+        "waterCredit": "Water Credit",
+        "sewerCredit": "Sewer Credit",
+        "consumption": "Consumption"
+      },
+      "tooltips": {
+        "type": "Customer type",
+        "branch": "Branch location",
+        "revenue": "Total revenue amount",
+        "sewer": "Total sewer amount",
+        "tanzeem": "Total tanzeem amount",
+        "estdama": "Total estdama amount",
+        "contract": "Total contract amount",
+        "taxes": "Total taxes amount",
+        "waterCredit": "Total water credit amount",
+        "sewerCredit": "Total sewer credit amount",
+        "consumption": "Total consumption amount"
+      }
+    },
+    "actions": {
+      "search": "Search records...",
+      "filterByBranch": "Filter by branch",
+      "allBranches": "All Branches",
+      "export": "Export",
+      "refresh": "Refresh",
+      "directSync": "Direct Sync",
+      "clearLocalData": "Clear Local Data",
+      "debugStorage": "Debug Storage"
+    },
+    "status": {
+      "lastUpdated": "Last Updated",
+      "notSyncedYet": "Not synced yet",
+      "syncing": "Syncing with SAP...",
+      "clearing": "Clearing...",
+      "noData": "No data available",
+      "errorLoading": "Error loading data"
+    },
+    "messages": {
+      "noDataToSync": "No data to sync. Please refresh data or check localStorage.",
+      "startingSync": "Starting SAP synchronization for {count} records...",
+      "syncCompleted": "SAP synchronization completed successfully.",
+      "syncFailed": "SAP synchronization failed.",
+      "networkError": "Network error during synchronization.",
+      "startingDirectSync": "Starting direct sync with {count} records...",
+      "directSyncCompleted": "Direct sync completed successfully",
+      "directSyncFailed": "Direct sync failed",
+      "networkErrorDirect": "Network error during direct sync",
+      "errorDuringDirectSync": "Error during direct sync",
+      "dataPreparationFailed": "Data preparation failed.",
+      "dataCleared": "Local data cleared successfully.",
+      "failedToClearData": "Failed to clear local data.",
+      "loadedFromStorage": "Loaded data from local storage.",
+      "failedToSaveLocally": "Couldn't save data locally. Some features may not work offline.",
+      "refreshingData": "Refreshing Oracle data...",
+      "dataRefreshedSuccessfully": "Data refreshed successfully!",
+      "failedToRefreshData": "Failed to refresh data: {errorMessage}",
+      "autoRefreshingData": "Auto-refreshing data..."
+    }
+  },
+  "oracleDataGov": {
+    "title": "Oracle Financial Data - Gov",
+    "subtitle": "View and manage Oracle government financial data for SAP B1 integration"
+  },
+  "journalEntryViewerGov": {
+    "header": {
+      "title": "Journal Entry Viewer - Gov",
+      "description": "Preview and sync government journal entries to SAP"
+    }
+  },
+  "logs": {
+    "title": "System Logs",
+    "subtitle": "View and manage system and integration logs",
+    "description": "Monitor system events, errors, and sync operations in real-time",
+    "status": {
+      "live": "Live",
+      "paused": "Paused"
+    },
+    "actions": {
+      "clear": "Clear Logs",
+      "download": "Download",
+      "refresh": "Refresh",
+      "search": "Search logs...",
+      "filterByLevel": "Filter by level",
+      "dateRange": "Date Range",
+      "dateFilterActive": "Date Filter Active",
+      "applyFilter": "Apply Filter",
+      "pause": "Pause",
+      "resume": "Resume",
+      "export": "Export"
+    },
+    "levels": {
+      "all": "All Levels",
+      "success": "Success",
+      "info": "Info",
+      "warning": "Warning",
+      "error": "Error"
+    },
+    "dateFilter": {
+      "startDate": "Start Date",
+      "endDate": "End Date"
+    },
+    "export": {
+      "currentView": "Export Current View",
+      "allLogs": "Export All Logs",
+      "errorLogs": "Export Error Logs"
+    },
+    "clear": {
+      "description": "Select which logs you want to clear. This action cannot be undone.",
+      "billingLogs": "Clear Billing Logs",
+      "errorLogs": "Clear Error Logs",
+      "clearAllLogs": "Clear All Logs"
+    },
+            "types": {
+          "all": "All Logs",
+          "billing": "Billing Logs",
+          "error": "Error Logs"
+        },
+        "loading": "Loading logs...",
+        "failedToLoad": "Failed to load logs",
+        "noLogsFound": "No logs found",
+        "tryChangingCriteria": "Try changing your search criteria or refresh",
+        "showingEntries": "Showing {count} log entries",
+        "autoRefresh": "Auto-refresh",
+        "on": "ON",
+        "off": "OFF",
+        "clearAllLogs": "Clear All Logs",
+        "dateFilterActive": "Date Filter Active",
+        "from": "From",
+        "to": "To",
+        "logsClearedSuccessfully": "Logs cleared successfully",
+        "failedToClearLogs": "Failed to clear logs",
+        "failedToExport": "Failed to export logs"
+  },
+  "schedule": {
+    "title": "Sync Schedule",
+    "subtitle": "Configure automatic sync scheduling with SAP",
+    "syncSchedule": {
+      "title": "Sync Schedule",
+      "description": "Configure when the sync process should run automatically",
+      "enable": "Enable Scheduled Sync",
+      "enableDescription": "Automatically sync data at specified intervals",
+      "quickPresets": "Quick Presets",
+      "choosePreset": "Choose a preset schedule",
+      "cronExpression": "Cron Expression",
+      "cronFormat": "Format: minute hour day month day-of-week",
+      "timezone": "Timezone"
+    },
+    "status": {
+      "title": "Schedule Status",
+      "description": "Current schedule status and execution information",
+      "currentStatus": "Current Status",
+      "active": "Active",
+      "disabled": "Disabled",
+      "nextRun": "Next Run",
+      "scheduleDisabled": "Schedule disabled",
+      "lastRun": "Last Run",
+      "success": "Success",
+      "failed": "Failed",
+      "pending": "Pending",
+      "unknown": "Unknown",
+      "processedRecords": "Processed",
+      "records": "records",
+      "in": "in",
+      "noSyncYet": "No sync has been performed yet",
+      "scheduleExpression": "Schedule Expression",
+      "runsEvery6Hours": "Runs every 6 hours",
+      "disabledMessage": "Scheduled sync is currently disabled. Enable it to start automatic synchronization.",
+      "notScheduled": "Not scheduled",
+      "testing": "Testing...",
+      "syncing": "Syncing..."
+    },
+    "retryPolicy": {
+      "title": "Retry Policy",
+      "description": "Configure retry settings when sync fails",
+      "retryAttempts": "Maximum Retry Attempts",
+      "retryAttemptsDesc": "Number of times to retry failed operations (0-10)",
+      "retryDelay": "Retry Delay (minutes)",
+      "retryDelayDesc": "Time to wait between retry attempts (1-60 minutes)",
+      "notificationSettings": "Notification Settings",
+      "notificationPlaceholder": "Enter email addresses for failure notifications (comma-separated)",
+      "updateRetrySettings": "Update Retry Settings"
+    },
+    "manualControls": {
+      "title": "Manual Controls",
+      "description": "Manually trigger the sync process outside of the schedule",
+      "triggerManualSync": "Trigger Manual Sync",
+      "triggerDescription": "This will immediately start the process of fetching data from Oracle and creating a journal entry in SAP B1."
+    },
+    "confirm": {
+      "title": "Confirm Sync Action",
+      "description": "You have data currently loaded in the application. How would you like to proceed?",
+      "syncWithCurrentData": "Sync with Current Data",
+      "reloadAndSync": "Reload and Sync"
+    },
+    "actions": {
+      "save": "Save",
+      "test": "Test Connection",
+      "runSync": "Run Sync Now",
+      "saveConfig": "Save Configuration",
+      "triggerScheduledTask": "Trigger Scheduled Task Now"
+    },
+    "messages": {
+      "startingSync": "Starting SAP B1 journal entry sync with {count} records...",
+      "manualSyncCompleted": "Manual sync completed successfully!",
+      "syncProcessFailed": "Sync process failed: {message}",
+      "syncCompleted": "Sync completed successfully",
+      "syncFailedNoMessage": "Sync failed with no error message.",
+      "scheduledTaskExecuted": "Scheduled task executed successfully",
+      "scheduledTaskFailed": "Scheduled task failed",
+      "failedToExecuteTask": "Failed to execute scheduled task",
+      "scheduleDisabled": "Schedule is disabled, task skipped",
+      "scheduleNotFound": "Schedule configuration not found"
+    }
+  },
+  "overview": {
+    "title": "System Overview",
+    "subtitle": "General information about system status and integration",
+    "syncHistory": {
+      "title": "Sync History",
+      "description": "Daily sync performance over the last 7 days",
+      "noData": "No sync history available"
+    },
+    "systemHealth": {
+      "title": "System Health",
+      "description": "Overall integration performance",
+      "successRate": "Success Rate",
+      "excellent": "Excellent",
+      "good": "Good",
+      "needsAttention": "Needs Attention",
+      "synced": "Synced",
+      "failed": "Failed"
+    },
+    "recentActivity": {
+      "title": "Recent Activity",
+      "description": "Latest sync operations and system events",
+      "noData": "No recent activity",
+      "refresh": "Refresh Activity",
+      "activityStats": "Activity Statistics",
+      "activityStatsDescription": "Detailed activity breakdown and system metrics",
+      "systemMetrics": "System Metrics",
+      "totalActivities": "Total Activities",
+      "systemUptime": "System Uptime",
+      "totalSyncs": "Total Syncs",
+      "avgSyncTime": "Avg Sync Time",
+      "dataIntegrity": "Data Integrity",
+      "systemLoad": "System Load",
+      "lastActivity": "Last Activity",
+      "success": "Success",
+      "errors": "Errors",
+      "warnings": "Warnings",
+      "info": "Info",
+      "viewDetails": "View Details",
+      "details": "Details"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Info",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "first": "First",
+    "last": "Last",
+    "of": "of",
+    "records": "records",
+    "showing": "Showing",
+    "to": "to",
+    "noData": "No data",
+    "tryAgain": "Try Again",
+    "refreshData": "Refresh Data",
+    "clear": "Clear",
+    "apply": "Apply",
+    "saving": "Saving...",
+    "cancel": "Cancel",
+    "unknownError": "Unknown error"
+  },
+  "language": {
+    "switch": "Switch Language",
+    "ar": "العربية",
+    "en": "English"
+  },
+  "header": {
+    "title": "Oracle → SAP B1",
+    "subtitle": "Billing Integration"
+  },
+  "footer": {
+    "allRightsReserved": "All Rights Reserved",
+    "createdBy": "Created by",
+    "about": "About",
+    "contactSupport": "Contact & Support"
+  },
+  "sap": {
+    "journalEntry": {
+      "success": "Successfully created 1 journal entry from {count} records",
+      "failed": "Failed to create journal entry: {error}",
+      "consolidated": "Successfully created 1 consolidated journal entry from {count} records",
+      "individual": "Successfully created {count} journal entries from {records} records",
+      "noBillingData": "No billing data provided to create journal entries.",
+      "noBillingDataOracle": "No billing data found in Oracle",
+      "journalEntryExists": "Journal entry already exists in SAP",
+      "journalEntryExistsMessage": "Journal entry already exists in SAP. Transaction Number: {transactionNumber}, Journal Number: {journalNumber}, Reference: {reference}",
+      "successfullyCreated": "Successfully created consolidated journal entry in SAP",
+      "failedToCreate": "Failed to create journal entry",
+      "failedToCreateConsolidated": "Failed to create consolidated journal entry",
+      "gettingJournalEntryData": "Getting journal entry data for preview",
+      "noBillingDataForPreview": "No billing data provided to create journal entry preview.",
+      "journalEntryDataRetrieved": "Journal entry data retrieved successfully",
+      "failedToGetJournalEntryData": "Failed to get journal entry data",
+      "checkingExistingJournalEntry": "Checking for existing journal entry in SAP",
+      "foundExistingJournalEntry": "Found existing journal entry",
+      "failedToCheckExistingJournalEntry": "Failed to check for existing journal entry",
+      "queryingLatestJournalEntryData": "Querying latest journal entry data from SAP",
+      "noJournalEntryFound": "No journal entry found with the specified criteria",
+      "noDataReturnedFromSAP": "No data returned from SAP",
+      "failedToQueryJournalEntryData": "Failed to query journal entry data",
+      "successfullyRetrievedJournalEntryData": "Successfully retrieved journal entry data",
+      "sampleBillingData": "Sample billing data:",
+      "checkingExistingJournalEntryBeforeCreating": "Checking for existing journal entry before creating new one...",
+      "noExistingJournalEntryFoundCreating": "No existing journal entry found, creating new one in SAP...",
+      "invalidBillingDateUsingCurrent": "Invalid billing date in record, using current date instead",
+      "errorProcessingBillingDateUsingCurrent": "Error processing billing date, using current date instead",
+      "calculatedTotalsForJournalEntry": "Calculated totals for journal entry:",
+      "journalEntryNotBalanced": "Journal entry is not balanced:",
+      "journalEntryBalanced": "Journal entry is balanced:",
+      "finalJournalEntryStructure": "Final journal entry structure:",
+      "queryingSAPEndpointForExistingEntries": "Querying SAP endpoint for existing entries:",
+      "noExistingJournalEntryFoundWithReference": "No existing journal entry found with reference:",
+      "queryingSAPEndpoint": "Querying SAP endpoint:"
+    }
+  },
+  "api": {
+    "sync": {
+      "requestBodyEmpty": "Request body is empty. Please ensure data is loaded before syncing.",
+      "invalidJsonFormat": "Invalid JSON format in request body. The data may be corrupted.",
+      "missingBillingData": "Missing billingData in request body",
+      "billingDataNotArray": "billingData must be an array",
+      "emptyDataset": "Cannot sync an empty dataset",
+      "unexpectedError": "An unexpected error occurred during SAP journal integration",
+      "syncCompleted": "SAP synchronization completed successfully",
+      "syncFailed": "SAP synchronization failed"
+    },
+    "cache": {
+      "syncStatusSaved": "Sync status saved successfully",
+      "invalidDataType": "Invalid data type. Expected \"schedule-config\" or \"sync-status\"",
+      "missingConfigData": "Missing config data",
+      "missingStatusData": "Missing status data",
+      "failedToSave": "Failed to save data",
+      "failedToGetStatus": "Failed to get cache status",
+      "noSyncPerformed": "No sync has been performed yet",
+      "scheduledSyncExecuted": "Scheduled sync executed successfully"
+    }
+  },
+  "journalEntryViewer": {
+    "title": "Journal Entry Viewer",
+    "subtitle": "Preview and sync journal entries to SAP",
+    "header": {
+      "title": "Journal Entry Viewer",
+      "description": "Preview and sync journal entries to SAP"
+    },
+    "actions": {
+      "refreshOracleData": "Refresh Oracle Data",
+      "generateView": "Generate View",
+      "syncToSAP": "Sync to SAP",
+      "syncing": "Syncing..."
+    },
+    "summary": {
+      "title": "Journal Entry Summary",
+      "description": "Overview of the journal entry to be created",
+      "referenceDate": "Reference Date",
+      "memo": "Memo",
+      "reference": "Reference",
+      "totalLines": "Total Lines",
+      "totalAmount": "Total Amount",
+      "consumption": "Water Consumption"
+    },
+    "summaryLabels": {
+      "branches": "Branches",
+      "records": "Records",
+      "successful": "Successful",
+      "locale": "Locale"
+    },
+    "branchCard": {
+      "title": "Branch {branch} — {count} records"
+    },
+    "totals": {
+      "title": "Financial Totals",
+      "description": "Summary of financial amounts",
+      "entagtam": "Total Production Sales",
+      "sewer": "Total Service Sales",
+      "estdama": "Regulatory Authority",
+      "taxes": "Taxes",
+      "waterConsumption": "Water Consumption"
+    },
+    "journalLines": {
+      "title": "Journal Entry Lines",
+      "description": "Detailed breakdown of all journal entry lines",
+      "accountCode": "Account Code",
+      "description": "Description",
+      "activity": "Activity",
+      "branch": "Branch",
+      "credit": "Credit",
+      "debit": "Debit",
+      "consumedWater": "Consumed Water"
+    },
+    "balanceCheck": {
+      "title": "Balance Verification",
+      "description": "Ensuring the journal entry is balanced (Total Credits = Total Debits)",
+      "totalCredits": "Total Credits",
+      "totalDebits": "Total Debits",
+      "balanced": "Journal entry is balanced",
+      "notBalanced": "Journal entry is not balanced"
+    },
+    "syncStatus": {
+      "title": "Sync Status",
+      "description": "Result of the last sync operation",
+      "success": "Sync successful",
+      "failed": "Sync failed",
+      "docEntry": "SAP Document Entry",
+      "timestamp": "Timestamp",
+      "message": "Message"
+    },
+    "messages": {
+      "noOracleData": "No Oracle data available. Please load data from the Oracle Data tab first.",
+      "generatingView": "Generating journal entry view from Oracle data...",
+      "noJournalEntry": "No journal entry data available to sync",
+      "notBalanced": "Cannot sync: Journal entry is not balanced. Please review the data.",
+      "syncSuccess": "Journal entry successfully synced to SAP!",
+      "syncFailed": "Sync failed: {message}",
+      "loadData": "Load Data",
+      "generateView": "Generate View",
+      "duplicateEntry": "Journal entry already exists in SAP",
+      "noJournalNumberForQuery": "No journal number or transaction number available for query",
+      "querySuccess": "Latest journal entry data retrieved successfully",
+      "queryFailed": "Failed to query journal entry: {message}",
+      "queryError": "Query failed: {message}",
+      "unknownError": "Unknown error occurred",
+      "errorGeneratingJournalEntry": "Error generating journal entry: {message}",
+      "failedToGenerateJournalEntry": "Failed to generate journal entry data",
+      "loadingOracleData": "Loading Oracle data...",
+      "retry": "Retry",
+      "duplicateJournalEntryDetected": "Duplicate Journal Entry Detected",
+      "duplicateEntryBadge": "Duplicate Entry",
+      "transactionNumber": "Transaction Number",
+      "journalNumber": "Journal Number",
+      "latestJournalEntryData": "Latest Journal Entry Data from SAP",
+      "realTimeDataDescription": "Real-time data retrieved from SAP B1 after sync",
+      "journalEntryLines": "Journal Entry Lines ({count} lines)",
+      "queryLatestJEData": "Query Latest JE Data"
+    }
+  }
+} 

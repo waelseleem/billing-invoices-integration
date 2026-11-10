@@ -1,0 +1,149 @@
+{"level":"info","message":"SAP Service initialized. SSL verification disabled","service":"billing-integration","timestamp":"2025-08-14T12:13:50.835Z"}
+{"level":"info","locale":"ar","message":"Generating journal entries (branch-based) from provided Oracle data","recordCount":7,"service":"billing-integration","timestamp":"2025-08-14T12:13:50.843Z"}
+{"level":"info","message":"جاري الحصول على بيانات القيد اليومي للمعاينة","service":"billing-integration","timestamp":"2025-08-14T12:13:50.844Z"}
+{"level":"info","message":"SAP Service initialized. SSL verification disabled","service":"billing-integration","timestamp":"2025-08-14T12:13:54.332Z"}
+{"level":"info","message":"Received request to start SAP journal integration","service":"billing-integration","timestamp":"2025-08-14T12:13:54.341Z"}
+{"level":"info","message":"Request method: POST","service":"billing-integration","timestamp":"2025-08-14T12:13:54.341Z"}
+{"level":"info","message":"Request headers: {\"accept\":\"*/*\",\"accept-encoding\":\"gzip, deflate, br, zstd\",\"accept-language\":\"en-US,en;q=0.8\",\"connection\":\"keep-alive\",\"content-length\":\"2406\",\"content-type\":\"application/json\",\"dnt\":\"1\",\"host\":\"localhost:3000\",\"origin\":\"http://localhost:3000\",\"referer\":\"http://localhost:3000/ar\",\"sec-ch-ua\":\"\\\"Not;A=Brand\\\";v=\\\"99\\\", \\\"Brave\\\";v=\\\"139\\\", \\\"Chromium\\\";v=\\\"139\\\"\",\"sec-ch-ua-mobile\":\"?0\",\"sec-ch-ua-platform\":\"\\\"Windows\\\"\",\"sec-fetch-dest\":\"empty\",\"sec-fetch-mode\":\"cors\",\"sec-fetch-site\":\"same-origin\",\"sec-gpc\":\"1\",\"user-agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36\",\"x-forwarded-for\":\"::1\",\"x-forwarded-host\":\"localhost:3000\",\"x-forwarded-port\":\"3000\",\"x-forwarded-proto\":\"http\"}","service":"billing-integration","timestamp":"2025-08-14T12:13:54.342Z"}
+{"level":"info","message":"Raw body length: 2406","service":"billing-integration","timestamp":"2025-08-14T12:13:54.343Z"}
+{"level":"info","message":"Raw body type: string","service":"billing-integration","timestamp":"2025-08-14T12:13:54.344Z"}
+{"level":"info","message":"Raw body starts with: \"{\"billingData\":[{\"CSTYPE\":\"C1002\",\"BRANCHE\":\"1\",\"C...\"","service":"billing-integration","timestamp":"2025-08-14T12:13:54.344Z"}
+{"level":"info","message":"Parsed body keys: billingData","service":"billing-integration","timestamp":"2025-08-14T12:13:54.345Z"}
+{"level":"info","message":"Processing 7 billing records","service":"billing-integration","timestamp":"2025-08-14T12:13:54.345Z"}
+{"level":"info","message":"First record keys: CSTYPE, BRANCHE, COSTCENTER, CONTRACT, ENTAGTAM, SEWER, TANZEEM, ESTDAMA, TAXES, ROUNDING, WATERCREDIT, SEWERCREDIT, WATERDEBIT, SEWERDEBIT, CONSUMP, BILNG_DATE, DATE_DUMP","service":"billing-integration","timestamp":"2025-08-14T12:13:54.346Z"}
+{"level":"info","message":"Starting branch-based SAP B1 journal entry creation from provided data","service":"billing-integration","timestamp":"2025-08-14T12:13:54.346Z"}
+{"level":"info","message":"Found 7 billing records to process","service":"billing-integration","timestamp":"2025-08-14T12:13:54.347Z"}
+{"level":"info","message":"First record keys: CSTYPE, BRANCHE, COSTCENTER, CONTRACT, ENTAGTAM, SEWER, TANZEEM, ESTDAMA, TAXES, ROUNDING, WATERCREDIT, SEWERCREDIT, WATERDEBIT, SEWERDEBIT, CONSUMP, BILNG_DATE, DATE_DUMP","service":"billing-integration","timestamp":"2025-08-14T12:13:54.347Z"}
+{"firstRecord":{"consump":2350078,"contract":658330,"entagtam":5621612.45,"estdama":1351220.65,"rounding":65675.203,"sewer":3184930.64,"tanzeem":23500.44,"taxes":233197.7788},"level":"info","message":"Sample billing data:","service":"billing-integration","timestamp":"2025-08-14T12:13:54.348Z"}
+{"level":"info","message":"Checking for existing journal entry before creating new one...","service":"billing-integration","timestamp":"2025-08-14T12:13:54.350Z"}
+{"level":"info","message":"Checking for existing journal entry in SAP","reference":"BILL-Contract-C1002-BR-1-20250814","service":"billing-integration","timestamp":"2025-08-14T12:13:54.351Z"}
+{"level":"info","message":"Querying SAP endpoint for existing entries:","service":"billing-integration","timestamp":"2025-08-14T12:13:54.351Z"}
+{"level":"info","message":"No SAP session found, attempting login","service":"billing-integration","timestamp":"2025-08-14T12:13:54.352Z"}
+{"level":"info","message":"Attempting to log in to SAP B1 (attempt 1)","service":"billing-integration","timestamp":"2025-08-14T12:13:54.353Z"}
+{"level":"info","message":"Successfully logged in to SAP B1 Service Layer","service":"billing-integration","timestamp":"2025-08-14T12:13:58.620Z"}
+{"level":"info","message":"[SAP Service] Making request to: https://192.168.11.22:50000/b1s/v1/JournalEntries?$filter=Reference eq 'BILL-Contract-C1002-BR-1-20250814'&$select=JdtNum,Number,ReferenceDate,Memo,Reference,JournalEntryLines&$top=1","service":"billing-integration","timestamp":"2025-08-14T12:13:58.621Z"}
+{"level":"info","message":"[SAP Service] Response status: 200","service":"billing-integration","timestamp":"2025-08-14T12:13:59.255Z"}
+{"level":"info","message":"No existing journal entry found with reference:","service":"billing-integration","timestamp":"2025-08-14T12:13:59.256Z"}
+{"level":"info","message":"No existing journal entry found, creating new one in SAP...","service":"billing-integration","timestamp":"2025-08-14T12:13:59.256Z"}
+{"dataKeys":["ReferenceDate","Memo","Reference","JournalEntryLines"],"endpoint":"JournalEntries","level":"info","message":"Posting data to SAP endpoint: JournalEntries","service":"billing-integration","timestamp":"2025-08-14T12:13:59.257Z"}
+{"date":"2025-08-14","level":"info","linesCount":11,"memo":"Oracle Billing Integration - Contract C1002 - Branch 1 - 2025-08-14","message":"Journal Entry details","service":"billing-integration","timestamp":"2025-08-14T12:13:59.259Z","totalCredit":11197104.159999998,"totalDebit":11197104.16}
+{"level":"info","message":"[SAP Service] Making request to: https://192.168.11.22:50000/b1s/v1/JournalEntries","service":"billing-integration","timestamp":"2025-08-14T12:13:59.260Z"}
+{"level":"info","message":"[SAP Service] Response status: 201","service":"billing-integration","timestamp":"2025-08-14T12:14:00.824Z"}
+{"branch":"1","journalNumber":45967,"level":"info","message":"Successfully created consolidated journal entry in SAP","service":"billing-integration","timestamp":"2025-08-14T12:14:00.825Z","transactionNumber":49750}
+{"level":"info","message":"Checking for existing journal entry before creating new one...","service":"billing-integration","timestamp":"2025-08-14T12:14:00.827Z"}
+{"level":"info","message":"Checking for existing journal entry in SAP","reference":"BILL-Contract-C1002-BR-2-20250814","service":"billing-integration","timestamp":"2025-08-14T12:14:00.827Z"}
+{"level":"info","message":"Querying SAP endpoint for existing entries:","service":"billing-integration","timestamp":"2025-08-14T12:14:00.828Z"}
+{"level":"info","message":"[SAP Service] Making request to: https://192.168.11.22:50000/b1s/v1/JournalEntries?$filter=Reference eq 'BILL-Contract-C1002-BR-2-20250814'&$select=JdtNum,Number,ReferenceDate,Memo,Reference,JournalEntryLines&$top=1","service":"billing-integration","timestamp":"2025-08-14T12:14:00.828Z"}
+{"level":"info","message":"[SAP Service] Response status: 200","service":"billing-integration","timestamp":"2025-08-14T12:14:00.986Z"}
+{"level":"info","message":"No existing journal entry found with reference:","service":"billing-integration","timestamp":"2025-08-14T12:14:00.987Z"}
+{"level":"info","message":"No existing journal entry found, creating new one in SAP...","service":"billing-integration","timestamp":"2025-08-14T12:14:00.987Z"}
+{"dataKeys":["ReferenceDate","Memo","Reference","JournalEntryLines"],"endpoint":"JournalEntries","level":"info","message":"Posting data to SAP endpoint: JournalEntries","service":"billing-integration","timestamp":"2025-08-14T12:14:00.987Z"}
+{"date":"2025-08-14","level":"info","linesCount":10,"memo":"Oracle Billing Integration - Contract C1002 - Branch 2 - 2025-08-14","message":"Journal Entry details","service":"billing-integration","timestamp":"2025-08-14T12:14:00.988Z","totalCredit":10864995.690000001,"totalDebit":10864995.69}
+{"level":"info","message":"[SAP Service] Making request to: https://192.168.11.22:50000/b1s/v1/JournalEntries","service":"billing-integration","timestamp":"2025-08-14T12:14:00.988Z"}
+{"level":"info","message":"[SAP Service] Response status: 201","service":"billing-integration","timestamp":"2025-08-14T12:14:01.520Z"}
+{"branch":"2","journalNumber":45968,"level":"info","message":"Successfully created consolidated journal entry in SAP","service":"billing-integration","timestamp":"2025-08-14T12:14:01.521Z","transactionNumber":49752}
+{"level":"info","message":"Checking for existing journal entry before creating new one...","service":"billing-integration","timestamp":"2025-08-14T12:14:01.522Z"}
+{"level":"info","message":"Checking for existing journal entry in SAP","reference":"BILL-Contract-C1002-BR-3-20250814","service":"billing-integration","timestamp":"2025-08-14T12:14:01.522Z"}
+{"level":"info","message":"Querying SAP endpoint for existing entries:","service":"billing-integration","timestamp":"2025-08-14T12:14:01.522Z"}
+{"level":"info","message":"[SAP Service] Making request to: https://192.168.11.22:50000/b1s/v1/JournalEntries?$filter=Reference eq 'BILL-Contract-C1002-BR-3-20250814'&$select=JdtNum,Number,ReferenceDate,Memo,Reference,JournalEntryLines&$top=1","service":"billing-integration","timestamp":"2025-08-14T12:14:01.523Z"}
+{"level":"info","message":"[SAP Service] Response status: 200","service":"billing-integration","timestamp":"2025-08-14T12:14:01.604Z"}
+{"level":"info","message":"No existing journal entry found with reference:","service":"billing-integration","timestamp":"2025-08-14T12:14:01.605Z"}
+{"level":"info","message":"No existing journal entry found, creating new one in SAP...","service":"billing-integration","timestamp":"2025-08-14T12:14:01.605Z"}
+{"dataKeys":["ReferenceDate","Memo","Reference","JournalEntryLines"],"endpoint":"JournalEntries","level":"info","message":"Posting data to SAP endpoint: JournalEntries","service":"billing-integration","timestamp":"2025-08-14T12:14:01.605Z"}
+{"date":"2025-08-14","level":"info","linesCount":11,"memo":"Oracle Billing Integration - Contract C1002 - Branch 3 - 2025-08-14","message":"Journal Entry details","service":"billing-integration","timestamp":"2025-08-14T12:14:01.606Z","totalCredit":5721709.97,"totalDebit":5721709.97}
+{"level":"info","message":"[SAP Service] Making request to: https://192.168.11.22:50000/b1s/v1/JournalEntries","service":"billing-integration","timestamp":"2025-08-14T12:14:01.606Z"}
+{"level":"info","message":"[SAP Service] Response status: 201","service":"billing-integration","timestamp":"2025-08-14T12:14:01.913Z"}
+{"branch":"3","journalNumber":45969,"level":"info","message":"Successfully created consolidated journal entry in SAP","service":"billing-integration","timestamp":"2025-08-14T12:14:01.914Z","transactionNumber":49754}
+{"level":"info","message":"Checking for existing journal entry before creating new one...","service":"billing-integration","timestamp":"2025-08-14T12:14:01.914Z"}
+{"level":"info","message":"Checking for existing journal entry in SAP","reference":"BILL-Contract-C1002-BR-4-20250814","service":"billing-integration","timestamp":"2025-08-14T12:14:01.914Z"}
+{"level":"info","message":"Querying SAP endpoint for existing entries:","service":"billing-integration","timestamp":"2025-08-14T12:14:01.915Z"}
+{"level":"info","message":"[SAP Service] Making request to: https://192.168.11.22:50000/b1s/v1/JournalEntries?$filter=Reference eq 'BILL-Contract-C1002-BR-4-20250814'&$select=JdtNum,Number,ReferenceDate,Memo,Reference,JournalEntryLines&$top=1","service":"billing-integration","timestamp":"2025-08-14T12:14:01.915Z"}
+{"level":"info","message":"[SAP Service] Response status: 200","service":"billing-integration","timestamp":"2025-08-14T12:14:03.585Z"}
+{"level":"info","message":"No existing journal entry found with reference:","service":"billing-integration","timestamp":"2025-08-14T12:14:03.586Z"}
+{"level":"info","message":"No existing journal entry found, creating new one in SAP...","service":"billing-integration","timestamp":"2025-08-14T12:14:03.587Z"}
+{"dataKeys":["ReferenceDate","Memo","Reference","JournalEntryLines"],"endpoint":"JournalEntries","level":"info","message":"Posting data to SAP endpoint: JournalEntries","service":"billing-integration","timestamp":"2025-08-14T12:14:03.588Z"}
+{"date":"2025-08-14","level":"info","linesCount":10,"memo":"Oracle Billing Integration - Contract C1002 - Branch 4 - 2025-08-14","message":"Journal Entry details","service":"billing-integration","timestamp":"2025-08-14T12:14:03.589Z","totalCredit":3214584.9,"totalDebit":3214584.9}
+{"level":"info","message":"[SAP Service] Making request to: https://192.168.11.22:50000/b1s/v1/JournalEntries","service":"billing-integration","timestamp":"2025-08-14T12:14:03.590Z"}
+{"level":"info","message":"[SAP Service] Response status: 201","service":"billing-integration","timestamp":"2025-08-14T12:14:03.839Z"}
+{"branch":"4","journalNumber":45970,"level":"info","message":"Successfully created consolidated journal entry in SAP","service":"billing-integration","timestamp":"2025-08-14T12:14:03.840Z","transactionNumber":49755}
+{"level":"info","message":"Checking for existing journal entry before creating new one...","service":"billing-integration","timestamp":"2025-08-14T12:14:03.841Z"}
+{"level":"info","message":"Checking for existing journal entry in SAP","reference":"BILL-Contract-C1002-BR-6-20250814","service":"billing-integration","timestamp":"2025-08-14T12:14:03.841Z"}
+{"level":"info","message":"Querying SAP endpoint for existing entries:","service":"billing-integration","timestamp":"2025-08-14T12:14:03.842Z"}
+{"level":"info","message":"[SAP Service] Making request to: https://192.168.11.22:50000/b1s/v1/JournalEntries?$filter=Reference eq 'BILL-Contract-C1002-BR-6-20250814'&$select=JdtNum,Number,ReferenceDate,Memo,Reference,JournalEntryLines&$top=1","service":"billing-integration","timestamp":"2025-08-14T12:14:03.843Z"}
+{"level":"info","message":"[SAP Service] Response status: 200","service":"billing-integration","timestamp":"2025-08-14T12:14:03.952Z"}
+{"level":"info","message":"No existing journal entry found with reference:","service":"billing-integration","timestamp":"2025-08-14T12:14:03.953Z"}
+{"level":"info","message":"No existing journal entry found, creating new one in SAP...","service":"billing-integration","timestamp":"2025-08-14T12:14:03.953Z"}
+{"dataKeys":["ReferenceDate","Memo","Reference","JournalEntryLines"],"endpoint":"JournalEntries","level":"info","message":"Posting data to SAP endpoint: JournalEntries","service":"billing-integration","timestamp":"2025-08-14T12:14:03.954Z"}
+{"date":"2025-08-14","level":"info","linesCount":10,"memo":"Oracle Billing Integration - Contract C1002 - Branch 6 - 2025-08-14","message":"Journal Entry details","service":"billing-integration","timestamp":"2025-08-14T12:14:03.954Z","totalCredit":5152551.24,"totalDebit":5152551.240000001}
+{"level":"info","message":"[SAP Service] Making request to: https://192.168.11.22:50000/b1s/v1/JournalEntries","service":"billing-integration","timestamp":"2025-08-14T12:14:03.955Z"}
+{"level":"info","message":"[SAP Service] Response status: 201","service":"billing-integration","timestamp":"2025-08-14T12:14:04.178Z"}
+{"branch":"6","journalNumber":45971,"level":"info","message":"Successfully created consolidated journal entry in SAP","service":"billing-integration","timestamp":"2025-08-14T12:14:04.179Z","transactionNumber":49756}
+{"level":"info","message":"Checking for existing journal entry before creating new one...","service":"billing-integration","timestamp":"2025-08-14T12:14:04.180Z"}
+{"level":"info","message":"Checking for existing journal entry in SAP","reference":"BILL-Contract-C1002-BR-7-20250814","service":"billing-integration","timestamp":"2025-08-14T12:14:04.181Z"}
+{"level":"info","message":"Querying SAP endpoint for existing entries:","service":"billing-integration","timestamp":"2025-08-14T12:14:04.182Z"}
+{"level":"info","message":"[SAP Service] Making request to: https://192.168.11.22:50000/b1s/v1/JournalEntries?$filter=Reference eq 'BILL-Contract-C1002-BR-7-20250814'&$select=JdtNum,Number,ReferenceDate,Memo,Reference,JournalEntryLines&$top=1","service":"billing-integration","timestamp":"2025-08-14T12:14:04.183Z"}
+{"level":"info","message":"[SAP Service] Response status: 200","service":"billing-integration","timestamp":"2025-08-14T12:14:04.263Z"}
+{"level":"info","message":"No existing journal entry found with reference:","service":"billing-integration","timestamp":"2025-08-14T12:14:04.263Z"}
+{"level":"info","message":"No existing journal entry found, creating new one in SAP...","service":"billing-integration","timestamp":"2025-08-14T12:14:04.263Z"}
+{"dataKeys":["ReferenceDate","Memo","Reference","JournalEntryLines"],"endpoint":"JournalEntries","level":"info","message":"Posting data to SAP endpoint: JournalEntries","service":"billing-integration","timestamp":"2025-08-14T12:14:04.264Z"}
+{"date":"2025-08-14","level":"info","linesCount":10,"memo":"Oracle Billing Integration - Contract C1002 - Branch 7 - 2025-08-14","message":"Journal Entry details","service":"billing-integration","timestamp":"2025-08-14T12:14:04.264Z","totalCredit":4635885.35,"totalDebit":4635885.350000001}
+{"level":"info","message":"[SAP Service] Making request to: https://192.168.11.22:50000/b1s/v1/JournalEntries","service":"billing-integration","timestamp":"2025-08-14T12:14:04.265Z"}
+{"level":"info","message":"[SAP Service] Response status: 201","service":"billing-integration","timestamp":"2025-08-14T12:14:05.436Z"}
+{"branch":"7","journalNumber":45972,"level":"info","message":"Successfully created consolidated journal entry in SAP","service":"billing-integration","timestamp":"2025-08-14T12:14:05.437Z","transactionNumber":49758}
+{"level":"info","message":"Checking for existing journal entry before creating new one...","service":"billing-integration","timestamp":"2025-08-14T12:14:05.439Z"}
+{"level":"info","message":"Checking for existing journal entry in SAP","reference":"BILL-Contract-C1002-BR-8-20250814","service":"billing-integration","timestamp":"2025-08-14T12:14:05.441Z"}
+{"level":"info","message":"Querying SAP endpoint for existing entries:","service":"billing-integration","timestamp":"2025-08-14T12:14:05.443Z"}
+{"level":"info","message":"[SAP Service] Making request to: https://192.168.11.22:50000/b1s/v1/JournalEntries?$filter=Reference eq 'BILL-Contract-C1002-BR-8-20250814'&$select=JdtNum,Number,ReferenceDate,Memo,Reference,JournalEntryLines&$top=1","service":"billing-integration","timestamp":"2025-08-14T12:14:05.446Z"}
+{"level":"info","message":"[SAP Service] Response status: 200","service":"billing-integration","timestamp":"2025-08-14T12:14:06.055Z"}
+{"level":"info","message":"No existing journal entry found with reference:","service":"billing-integration","timestamp":"2025-08-14T12:14:06.056Z"}
+{"level":"info","message":"No existing journal entry found, creating new one in SAP...","service":"billing-integration","timestamp":"2025-08-14T12:14:06.057Z"}
+{"dataKeys":["ReferenceDate","Memo","Reference","JournalEntryLines"],"endpoint":"JournalEntries","level":"info","message":"Posting data to SAP endpoint: JournalEntries","service":"billing-integration","timestamp":"2025-08-14T12:14:06.057Z"}
+{"date":"2025-08-14","level":"info","linesCount":10,"memo":"Oracle Billing Integration - Contract C1002 - Branch 8 - 2025-08-14","message":"Journal Entry details","service":"billing-integration","timestamp":"2025-08-14T12:14:06.058Z","totalCredit":5024553.230000001,"totalDebit":5024553.23}
+{"level":"info","message":"[SAP Service] Making request to: https://192.168.11.22:50000/b1s/v1/JournalEntries","service":"billing-integration","timestamp":"2025-08-14T12:14:06.059Z"}
+{"level":"info","message":"[SAP Service] Response status: 201","service":"billing-integration","timestamp":"2025-08-14T12:14:06.930Z"}
+{"branch":"8","journalNumber":45973,"level":"info","message":"Successfully created consolidated journal entry in SAP","service":"billing-integration","timestamp":"2025-08-14T12:14:06.931Z","transactionNumber":49760}
+{"docEntries":[49750,49752,49754,49755,49756,49758,49760],"journalNumbers":[45967,45968,45969,45970,45971,45972,45973],"level":"info","message":"SAP synchronization completed successfully","service":"billing-integration","timestamp":"2025-08-14T12:14:06.933Z"}
+{"level":"info","locale":"ar","message":"Generating journal entries (branch-based) from provided Oracle data","recordCount":7,"service":"billing-integration","timestamp":"2025-08-14T12:15:50.250Z"}
+{"level":"info","message":"جاري الحصول على بيانات القيد اليومي للمعاينة","service":"billing-integration","timestamp":"2025-08-14T12:15:50.252Z"}
+{"level":"info","locale":"ar","message":"Generating journal entries (branch-based) from provided Oracle data","recordCount":7,"service":"billing-integration","timestamp":"2025-08-14T12:22:42.615Z"}
+{"level":"info","message":"جاري الحصول على بيانات القيد اليومي للمعاينة","service":"billing-integration","timestamp":"2025-08-14T12:22:42.615Z"}
+{"level":"info","message":"SAP Service initialized. SSL verification disabled","service":"billing-integration","timestamp":"2026-01-22T17:19:41.379Z"}
+{"level":"info","message":"SAP Service initialized. SSL verification disabled","service":"billing-integration","timestamp":"2026-01-22T17:19:41.448Z"}
+{"level":"info","message":"SAP Service initialized. SSL verification disabled","service":"billing-integration","timestamp":"2026-01-22T17:19:41.474Z"}
+{"level":"info","message":"SAP Service initialized. SSL verification disabled","service":"billing-integration","timestamp":"2026-01-22T17:19:41.529Z"}
+{"level":"info","message":"SAP Service initialized. SSL verification disabled","service":"billing-integration","timestamp":"2026-01-22T17:19:46.764Z"}
+{"level":"info","message":"SAP Service initialized. SSL verification disabled","service":"billing-integration","timestamp":"2026-01-22T17:21:46.372Z"}
+{"level":"info","message":"SAP Service initialized. SSL verification disabled","service":"billing-integration","timestamp":"2026-01-22T17:21:46.409Z"}
+{"level":"info","message":"SAP Service initialized. SSL verification disabled","service":"billing-integration","timestamp":"2026-01-22T17:21:46.419Z"}
+{"level":"info","message":"SAP Service initialized. SSL verification disabled","service":"billing-integration","timestamp":"2026-01-22T17:21:46.452Z"}
+{"level":"info","message":"SAP Service initialized. SSL verification disabled","service":"billing-integration","timestamp":"2026-01-22T17:21:51.194Z"}
+{"level":"info","message":"SAP Service initialized. SSL verification disabled","service":"billing-integration","timestamp":"2026-11-09T12:30:34.333Z"}
+{"level":"info","message":"SAP Service initialized. SSL verification disabled","service":"billing-integration","timestamp":"2026-11-09T12:30:34.420Z"}
+{"level":"info","message":"SAP Service initialized. SSL verification disabled","service":"billing-integration","timestamp":"2026-11-09T12:30:34.337Z"}
+{"level":"info","message":"SAP Service initialized. SSL verification disabled","service":"billing-integration","timestamp":"2026-11-09T12:30:36.255Z"}
+{"level":"info","message":"SAP Service initialized. SSL verification disabled","service":"billing-integration","timestamp":"2026-11-10T10:35:03.237Z"}
+{"error":{},"level":"error","message":"Error generating GOV journal entry data","service":"billing-integration","timestamp":"2026-11-10T10:35:03.258Z"}
+{"level":"info","message":"SAP Service initialized. SSL verification disabled","service":"billing-integration","timestamp":"2026-11-10T10:35:04.270Z"}
+{"level":"info","message":"Received request to start GOV SAP journal integration","service":"billing-integration","timestamp":"2026-11-10T10:35:04.281Z"}
+{"level":"info","message":"Request method: POST","service":"billing-integration","timestamp":"2026-11-10T10:35:04.281Z"}
+{"level":"info","message":"Request headers: {\"accept\":\"*/*\",\"content-length\":\"2\",\"content-type\":\"application/json\",\"host\":\"localhost:3000\",\"user-agent\":\"curl/7.55.1\",\"x-forwarded-for\":\"::1\",\"x-forwarded-host\":\"localhost:3000\",\"x-forwarded-port\":\"3000\",\"x-forwarded-proto\":\"http\"}","service":"billing-integration","timestamp":"2026-11-10T10:35:04.282Z"}
+{"level":"info","message":"Raw body length: 2","service":"billing-integration","timestamp":"2026-11-10T10:35:04.282Z"}
+{"level":"info","message":"Raw body type: string","service":"billing-integration","timestamp":"2026-11-10T10:35:04.283Z"}
+{"level":"info","message":"Raw body starts with: \"{}...\"","service":"billing-integration","timestamp":"2026-11-10T10:35:04.283Z"}
+{"level":"info","message":"Parsed body keys: ","service":"billing-integration","timestamp":"2026-11-10T10:35:04.283Z"}
+{"level":"warn","message":"Missing billingData property in request body","service":"billing-integration","timestamp":"2026-11-10T10:35:04.283Z"}
+{"level":"info","locale":"en","message":"Generating GOV journal entries (branch-based) from provided Oracle data","recordCount":0,"service":"billing-integration","timestamp":"2026-11-10T10:35:09.578Z"}
+{"level":"info","message":"SAP Service initialized. SSL verification disabled","service":"billing-integration","timestamp":"2026-11-10T11:14:35.712Z"}
+{"level":"info","locale":"ar","message":"Generating journal entries (branch-based) from provided Oracle data","recordCount":7,"service":"billing-integration","timestamp":"2026-11-10T11:14:35.729Z"}
+{"level":"info","message":"جاري الحصول على بيانات القيد اليومي للمعاينة","service":"billing-integration","timestamp":"2026-11-10T11:14:35.730Z"}
+{"level":"info","message":"SAP Service initialized. SSL verification disabled","service":"billing-integration","timestamp":"2026-11-10T11:14:46.982Z"}
+{"level":"info","locale":"ar","message":"Generating GOV journal entries (branch-based) from provided Oracle data","recordCount":8,"service":"billing-integration","timestamp":"2026-11-10T11:14:46.998Z"}
+{"level":"info","message":"جاري الحصول على بيانات القيد اليومي للمعاينة","service":"billing-integration","timestamp":"2026-11-10T11:14:46.999Z"}
+{"level":"info","locale":"ar","message":"Generating GOV journal entries (branch-based) from provided Oracle data","recordCount":8,"service":"billing-integration","timestamp":"2026-11-10T11:14:48.619Z"}
+{"level":"info","message":"جاري الحصول على بيانات القيد اليومي للمعاينة","service":"billing-integration","timestamp":"2026-11-10T11:14:48.620Z"}
+{"level":"info","message":"SAP Service initialized. SSL verification disabled","service":"billing-integration","timestamp":"2026-11-10T11:34:22.319Z"}
+{"level":"info","locale":"ar","message":"Generating journal entries (branch-based) from provided Oracle data","recordCount":7,"service":"billing-integration","timestamp":"2026-11-10T11:34:22.335Z"}
+{"level":"info","message":"جاري الحصول على بيانات القيد اليومي للمعاينة","service":"billing-integration","timestamp":"2026-11-10T11:34:22.336Z"}
+{"level":"info","message":"SAP Service initialized. SSL verification disabled","service":"billing-integration","timestamp":"2026-11-10T11:34:27.771Z"}
+{"level":"info","locale":"ar","message":"Generating GOV journal entries (branch-based) from provided Oracle data","recordCount":8,"service":"billing-integration","timestamp":"2026-11-10T11:34:27.795Z"}
+{"level":"info","message":"جاري الحصول على بيانات القيد اليومي للمعاينة","service":"billing-integration","timestamp":"2026-11-10T11:34:27.795Z"}

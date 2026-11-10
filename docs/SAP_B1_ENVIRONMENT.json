@@ -1,0 +1,37 @@
+{
+  "id": "sap-b1-environment",
+  "name": "SAP B1 Environment",
+  "values": [
+    {
+      "key": "SAP_SERVICE_LAYER_URL",
+      "value": "https://192.168.11.22:50000/b1s/v1",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "SAP_COMPANY_DB",
+      "value": "BS_NEW",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "SAP_USERNAME",
+      "value": "BS2",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "SAP_PASSWORD",
+      "value": "admin2007",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "B1SESSION",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    }
+  ],
+  "_postman_variable_scope": "environment"
+} 

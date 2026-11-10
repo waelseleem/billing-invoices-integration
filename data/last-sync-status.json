@@ -1,0 +1,9 @@
+{
+  "timestamp": "2025-07-28T08:28:13.700Z",
+  "success": true,
+  "recordsProcessed": 7,
+  "duration": "10.7s",
+  "docEntry": null,
+  "journalNumber": null,
+  "message": "Successfully created 1 consolidated journal entry from 7 records"
+}
