@@ -25,7 +25,24 @@ function getTranslation(locale: string, key: string): string {
 
 // Government business partner mapping (عملاء قطاع عام وحكومى)
 const GOV_BP_CODE = 'C1001';
-const GOV_BP_LABEL = 'عملاء قطاع عام وحكومى - تعاقد (C1001)';
+const GOV_BP_LABEL = 'عملاء قطاع عام و حكومى';
+// Control account SAP resolves from the C1001 business partner master data.
+// It is not part of the JournalEntries payload, it is documented here so the
+// Gov mapping can be audited against a real SAP journal entry.
+export const GOV_BP_CONTROL_ACCOUNT = '1231112';
+
+/**
+ * Gov G/L account labels exactly as they appear in SAP
+ * (G/L Acct/BP Name column of a real Gov journal entry).
+ */
+const GOV_ACCOUNT_LABELS: Record<string, string> = {
+  '324322': 'الضريبة على القيمة المضافة',
+  '511111': 'إجمالي مبيعات الإنتاج التام من السلع',
+  '511121': 'إجمالي المبيعات من الصرف الصحي المعالج',
+  '51211': 'إيرادات مبيعات اخري',
+  '324371': 'جهاز التنظيم وحماية المستهلك',
+  '324324': 'الضريبة على الدمغة',
+};
 
 interface GovBranchJournal {
   branch: string;
@@ -49,8 +66,9 @@ interface GovJournalPreviewResult {
  * Gov-specific wrapper around the existing SapJournalIntegration.
  *
  * It reuses the proven journal builder (same accounts, same totals) and only
- * rewrites the business partner to C1001 and the reference/memo to a GOV
- * specific value so that Gov entries never collide with People entries.
+ * rewrites the business partner to C1001, the G/L line descriptions to the Gov
+ * wording, and the reference/memo to a GOV specific value so that Gov entries
+ * never collide with People entries.
  */
 export class GovJournalIntegration {
   private readonly base = new SapJournalIntegration();
@@ -64,7 +82,9 @@ export class GovJournalIntegration {
     const reference = `BILL-GOV-${GOV_BP_CODE}-BR-${branch}-${compactDate}`;
     const memo = `Oracle Billing Integration - Gov Contract ${GOV_BP_CODE} - Branch ${branch} - ${referenceDate}`;
 
-    const journalEntryLines = (journalEntry?.JournalEntryLines || []).map((line: any) => {
+    const sourceLines: any[] = journalEntry?.JournalEntryLines || [];
+
+    const journalEntryLines = sourceLines.map((line: any) => {
       // The main debit line is the one that carries the business partner (ShortName).
       if (line && line.ShortName) {
         return {
@@ -73,7 +93,10 @@ export class GovJournalIntegration {
           LineMemo: GOV_BP_LABEL,
         };
       }
-      return line;
+      // Gov uses its own G/L account descriptions (for example 511121 is
+      // "إجمالي المبيعات من الصرف الصحي المعالج" for Gov, not the People text).
+      const govLabel = line?.AccountCode ? GOV_ACCOUNT_LABELS[line.AccountCode] : undefined;
+      return govLabel ? { ...line, LineMemo: govLabel } : line;
     });
 
     return {
@@ -92,7 +115,10 @@ export class GovJournalIntegration {
     billingData: any[],
     locale: string = 'en'
   ): Promise<GovJournalPreviewResult> {
-    const result = await this.base.getJournalEntryData(billingData, locale);
+    // Gov posts the WATERDEBIT amount to 51211 (other revenue) instead of 511111.
+    const result = await this.base.getJournalEntryData(billingData, locale, {
+      waterDebitAccount: '51211',
+    });
 
     if (!result.success || !result.journalEntries) {
       return {

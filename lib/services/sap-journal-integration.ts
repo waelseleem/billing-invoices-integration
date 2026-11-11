@@ -354,7 +354,14 @@ export class SapJournalIntegration {
   /**
    * Get journal entry data without posting to SAP (for preview/viewer)
    */
-  async getJournalEntryData(billingData: any[], locale: string = 'en'): Promise<{
+  async getJournalEntryData(billingData: any[], locale: string = 'en', options?: {
+    /**
+     * Account used for the WATERDEBIT credit line. Defaults to 511111, which
+     * is what the People journal entry uses. The Gov journal entry posts the
+     * same amount to 51211 instead.
+     */
+    waterDebitAccount?: string;
+  }): Promise<{
     success: boolean;
     message: string;
     journalEntries?: Array<{
@@ -392,7 +399,7 @@ export class SapJournalIntegration {
 
       const journalEntries = Object.entries(groupedByBranch).map(([branch, records]) => {
         const totals = this.calculateTotals(records);
-        const journalEntry = this.createBranchConsolidatedJournalEntry(records, branch, locale);
+        const journalEntry = this.createBranchConsolidatedJournalEntry(records, branch, locale, options);
         return {
           branch,
           journalEntry,
@@ -817,7 +824,8 @@ export class SapJournalIntegration {
   private createBranchConsolidatedJournalEntry(
     records: MonthBillingDto[],
     branch: string,
-    locale: string = 'en'
+    locale: string = 'en',
+    options?: { waterDebitAccount?: string }
   ): JournalEntry {
     const firstRecord = records[0];
     let formattedDate: string;
@@ -875,14 +883,18 @@ export class SapJournalIntegration {
     addCreditLine('51211', totals.rounding, 'إيرادات مبيعات أخرى', '23');
 
     let additionalCredit = 0;
+    // Account for the WATERDEBIT credit line: 511111 for People, 51211 for Gov.
+    const waterDebitAccount = options?.waterDebitAccount || '511111';
     if (totals.waterDebit > 0) {
       journalLines.push({
-        AccountCode: '511111',
+        AccountCode: waterDebitAccount,
         Debit: 0,
         Credit: parseFloat(totals.waterDebit.toFixed(2)),
         CostingCode2: branch,
         CostingCode3: '21',
-        LineMemo: 'إجمالي مبيعات الإنتاج التام من السلع',
+        LineMemo: waterDebitAccount === '511111'
+          ? 'إجمالي مبيعات الإنتاج التام من السلع'
+          : 'إيرادات مبيعات أخرى',
       });
       additionalCredit += totals.waterDebit;
     }

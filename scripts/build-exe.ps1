@@ -73,6 +73,13 @@ if (-not $oracleBinary) {
     throw 'oracledb win32-x64 native binary is missing from the staged bundle.'
 }
 
+# Bundle the Node.js runtime used for the build. caxa used to copy it implicitly.
+$nodeSource = (Get-Command node -ErrorAction Stop).Source
+$nodeTarget = Join-Path $staging 'node_modules\.bin\node.exe'
+New-Item -ItemType Directory -Path (Split-Path -Parent $nodeTarget) -Force | Out-Null
+Copy-Item $nodeSource $nodeTarget -Force
+Write-Host "==> Bundled Node.js runtime: $nodeSource"
+
 if ($SkipPackage) {
     Write-Host "==> Staged application: $staging"
     return
@@ -82,8 +89,10 @@ $outPath = Join-Path $root $Output
 New-Item -ItemType Directory -Path (Split-Path -Parent $outPath) -Force | Out-Null
 
 Write-Host "==> Packaging $outPath ..."
-npx --yes caxa@3.0.1 --input $staging --output $outPath --no-dedupe --uncompression-message 'Extracting Billing Integration, please wait...' -- "{{caxa}}/node_modules/.bin/node.exe" "{{caxa}}/start.cjs"
-if ($LASTEXITCODE -ne 0) { throw 'caxa packaging failed.' }
+# caxa's own archiver truncated the payload on this machine, so the exe is
+# assembled from the caxa stub plus a verified tar archive (see package-exe.mjs).
+node scripts\package-exe.mjs --input $staging --output $outPath --message 'Extracting Billing Integration, please wait...'
+if ($LASTEXITCODE -ne 0) { throw 'packaging failed.' }
 
 $size = [math]::Round((Get-Item $outPath).Length / 1MB, 1)
 Write-Host "==> Done: $outPath ($size MB)"

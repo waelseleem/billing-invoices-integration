@@ -31,3 +31,5 @@ next-env.d.ts
 /Billing Integration (Bani Swaif Water).exe
 /Billing Integration (Bani Swaif Water).rar
 /Setup/Req/Oracle.rar
+# Runtime logs are written to %LOCALAPPDATA%\BillingIntegration\logs in the packaged app.
+/logs/*.log

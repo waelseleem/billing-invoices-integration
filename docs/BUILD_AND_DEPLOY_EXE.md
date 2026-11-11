@@ -3,8 +3,13 @@
 The application is packaged as a single Windows `.exe` using:
 
 - `next build` with `output: 'standalone'`
-- a portable Node.js runtime
-- [`caxa`](https://github.com/leafac/caxa) for the self-extracting executable wrapper
+- a portable Node.js runtime (`node.exe` copied from the build machine)
+- the [`caxa`](https://github.com/leafac/caxa) self-extracting stub
+
+`scripts/package-exe.mjs` assembles the executable: it appends a `tar.gz` of the
+staged bundle to the caxa stub, writes the caxa footer, and **fully extracts the
+payload again to verify it** before and after assembly. A truncated or
+incomplete bundle therefore fails the build instead of shipping.
 
 ## Build
 
@@ -21,7 +26,9 @@ The executable is written to:
 dist\Billing Integration (Bani Swaif Water).exe
 ```
 
-The first build downloads `caxa` through `npx`, so an internet connection is required. The build also copies the Oracle native addon (`oracledb`) and the runtime `.env` / `.env.local` files into the package.
+`caxa` is a dev dependency, so no `npx` download is required. The build also
+copies the Oracle native addon (`oracledb`), the portable `node.exe`, and the
+runtime `.env` / `.env.local` files into the package.
 
 ### Build options
 
@@ -87,9 +94,31 @@ SAP_PASSWORD=admin2007
 
 Oracle connection settings are currently defined in `lib/services/oracle-service.ts` (`ORACLE_CONFIG`) and are compiled into the package.
 
+## Gov journal entry mapping
+
+The Gov tab reuses the People journal builder (`lib/services/sap-journal-integration.ts`)
+and rewrites the business partner, line descriptions and reference
+(`lib/services/gov-journal-integration.ts`):
+
+| Oracle column | Account | Notes |
+|---|---|---|
+| `ENTAGTAM` | `511111` | إجمالي مبيعات الإنتاج التام من السلع |
+| `SEWER` | `511121` | إجمالي المبيعات من الصرف الصحي المعالج |
+| `CONTRACT` | `51211` | إيرادات مبيعات اخري |
+| `ESTDAMA` | `324371` | جهاز التنظيم وحماية المستهلك |
+| `TAXES` | `324322` | الضريبة على القيمة المضافة |
+| `TANZEEM` | `324324` | الضريبة على الدمغة (line added only when the amount is non-zero) |
+| `ROUNDING` | `51211` | إيرادات مبيعات اخري (rounding adjustment) |
+| `WATERDEBIT` | `51211` | other revenue; the People entry posts this to `511111` |
+| Business partner | `C1001` | control account `1231112` comes from the BP master data |
+
+`SEWERDEBIT` stays on `511121`. Gov entries are grouped per branch with
+reference `BILL-GOV-C1001-BR-{branch}-{YYYYMMDD}`.
+
 ## Troubleshooting
 
 - **`DPI-1047` / "Oracle thick mode is required"**: the Oracle Instant Client is missing or not at `C:\oracle\instantclient_19_26`.
 - **Port already in use**: stop the other process using port `3000`, or set `PORT` before launching the executable.
 - **Windows SmartScreen prompt**: the executable is not code-signed. Choose "More info" → "Run anyway", or sign it with your organization's certificate.
 - **Blank page after an update**: the old version may still be running. Close it, then start the new executable.
+- **`Cannot find module 'styled-jsx/style'` (or another missing module) on start**: an interrupted start left an incomplete extraction in `%TEMP%\caxa`. Close every instance of the executable, delete `%TEMP%\caxa`, then start it again. The exe re-extracts on the next run.
