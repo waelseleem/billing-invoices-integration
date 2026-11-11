@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
+    "build:exe": "powershell -ExecutionPolicy Bypass -File scripts/build-exe.ps1",
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start"
@@ -78,13 +79,5 @@
     "postcss": "^8.5",
     "tailwindcss": "^3.4.17",
     "typescript": "^5"
-  },
-  "pkg": {
-    "scripts": "server.js",
-    "assets": [
-      ".next/**/*",
-      "public/**/*"
-    ],
-    "targets": ["node18-win-x64"]
   }
 }
