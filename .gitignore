@@ -27,8 +27,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# large binaries (excluded from git)
-/Billing Integration (Bani Swaif Water).exe
+# large binaries (the shipped .exe is tracked with Git LFS, see .gitattributes)
 /Billing Integration (Bani Swaif Water).rar
 /Setup/Req/Oracle.rar
 # Runtime logs are written to %LOCALAPPDATA%\BillingIntegration\logs in the packaged app.
